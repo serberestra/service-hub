@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServiceAddComponent } from './components/service-add/service-add.component';
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ServiceEditComponent } from './components/service-edit/service-edit.com
     RegisterComponent,
     NotFoundComponent,
     ServiceAddComponent,
-    ServiceEditComponent
+    ServiceEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
