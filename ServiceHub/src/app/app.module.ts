@@ -13,6 +13,9 @@ import { ServiceAddComponent } from './components/service-add/service-add.compon
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { ReservationAddComponent } from './components/reservation-add/reservation-add.component';
+import { WorkerlistComponent } from './components/reservation-add/workerlist/workerlist.component';
+import { WorkerCardComponent } from './components/reservation-add/workerlist/worker-card/worker-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { FooterComponent } from './components/footer/footer.component';
     ServiceAddComponent,
     ServiceEditComponent,
     FilterPipe,
-    FooterComponent
+    FooterComponent,
+    ReservationAddComponent,
+    WorkerlistComponent,
+    WorkerCardComponent
   ],
   imports: [
     BrowserModule,

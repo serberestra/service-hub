@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     
     if (this.authService.login(form.value.username, form.value.password)) {
       console.log("successful Login Router away...");
-      this.router.navigate(['/useroptions']);
+      this.router.navigate(['/reservationAdd']); // reservationAdd  // useroptions
     } else {
       console.log("unsuccessful Login stay at Login...");
     }

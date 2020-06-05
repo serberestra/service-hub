@@ -1,0 +1,21 @@
+<p>worker-card works!</p>
+
+
+<!-- 
+    /**
+     *    id?: string,
+          name: string,
+          lastName: string,
+          companyId?: string,
+          serviceName: string,
+          status?: number
+     */
+ -->
+
+ <div class="card mb-1">
+     <div class="card-header">{{ worker.serviceName }}</div>
+     <div class="card-body">{{ worker.name }} {{ worker.lastName }}</div>
+     <div class="card-footer">status: {{ worker.status }}<button class="btn btn-sm btn-outline-primary ml-4">Reserve</button></div>
+ </div>
+
+ 
