@@ -12,6 +12,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServiceAddComponent } from './components/service-add/service-add.component';
 import { ServiceEditComponent } from './components/service-edit/service-edit.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     NotFoundComponent,
     ServiceAddComponent,
     ServiceEditComponent,
-    FilterPipe
+    FilterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
