@@ -1,47 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- LOGIN -->
+<section id="login" style="margin-bottom: 200px;" class="mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <h4>User Login</h4>
+          </div>
+          <div class="card-body">
 
-<head>
-  <!-- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="shortcut icon" href=""> -->
-  <title>ServiceHub</title>
-</head>
-
-<body>
-
-  <!-- LOGIN -->
-  <section id="login" style="margin-top: 270px; margin-bottom: 200px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card">
-            <div class="card-header">
-              <h4>User Login</h4>
-            </div>
-            <div class="card-body">
-
-              <!-- FORM -->
-              <!--  role="form" -->
-              <form ngNativeValidate (submit)="onSubmit(postForm)" #postForm="ngForm">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input name="username" id="username" [(ngModel)]="username" required type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input id="pass" [(ngModel)]="password" required name="password" type="password" class="form-control">
-                </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Login">
-              </form>
-            </div>
+            <!-- FORM -->
+            <!--  role="form" -->
+            <form ngNativeValidate (submit)="onSubmit(postForm)" #postForm="ngForm">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input name="username" id="username" [(ngModel)]="username" required type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input id="pass" [(ngModel)]="password" required name="password" type="password" class="form-control">
+              </div>
+              <input type="submit" class="btn btn-primary btn-block" value="Login">
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</body>
-
-</html>
+  </div>
+</section>

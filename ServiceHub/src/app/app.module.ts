@@ -16,6 +16,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ReservationAddComponent } from './components/reservation-add/reservation-add.component';
 import { WorkerlistComponent } from './components/reservation-add/workerlist/workerlist.component';
 import { WorkerCardComponent } from './components/reservation-add/workerlist/worker-card/worker-card.component';
+import { RegisterCompanyComponent } from './components/register-company/register-company.component';
+import { RegisterWorkerComponent } from './components/register-worker/register-worker.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { WorkerCardComponent } from './components/reservation-add/workerlist/wor
     FooterComponent,
     ReservationAddComponent,
     WorkerlistComponent,
-    WorkerCardComponent
+    WorkerCardComponent,
+    RegisterCompanyComponent,
+    RegisterWorkerComponent
   ],
   imports: [
     BrowserModule,
