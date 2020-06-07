@@ -1,0 +1,68 @@
+<div class="row mt-5 d-flex justify-content-center">
+    <div class="card shadow rounded">
+        <div class="card-body">
+            <form class="form-signin needs-validation" novalidate id="fSetup">
+                <h1 class="h3 mb-3 font-weight-normal text-center"><strong>Company Registration</strong></h1>
+                <h5 class="mb-3 font-weight-normal text-center">Please enter the following information:</h5>
+                <div class="form-group">
+                    <label for="inpCompnay" class="text-left">* Company Name</label>
+                    <input type="text" id="inpCompnay" class="form-control mb-3"
+                        placeholder="Enter the company's name..." required>
+                    <div class="invalid-feedback">
+                        Company name is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inpPhone" class="text-left">* Phone Number</label>
+                    <input type="tel" id="inpPhone" class="form-control mb-3"
+                        placeholder="Enter the company's phone number..." required>
+                    <div class="invalid-feedback">
+                        Phone number is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inpAddress" class="text-left">* Address</label>
+                    <input type="text" id="inpAddress" class="form-control mb-3"
+                        placeholder="Enter the compnay's address..." required>
+                    <div class="invalid-feedback">
+                        Addres is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inpEmail" class="text-left">* Email</label>
+                    <input type="email" id="inpEmail" class="form-control mb-3" placeholder="Enter your email" required>
+                    <div class="invalid-feedback">
+                        Follow the next format: example@example.com
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inpPassword" class="text-left">* Password</label>
+                    <input type="password" id="inpPassword" class="form-control mb-3" placeholder="Password"
+                        minlength="6" maxlength="10" required>
+                    <div class="invalid-feedback">
+                        Follow the next format:
+                        Al lest one the follows
+                        <ul>
+                            <li>1 - Uppercase</li>
+                            <li>1 - Lowercase</li>
+                            <li>1 - Number</li>
+                            <li>1 - Symbol</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inpRePassword" class="text-left">* Re-Password</label>
+                    <input type="password" id="inpRePassword" class="form-control mb-3" placeholder="Password"
+                        minlength="6" maxlength="10" required>
+                    <div class="invalid-feedback">
+                        Your password and your re-password do not match.
+                    </div>
+                </div>
+                <button class="btn btn-danger btn-block text-uppercase" type="button" id="btnCreate">
+                    <strong>Accept</strong>
+                </button>
+                <p class="mt-4 mb-0 text-muted">Service Hub © 2020</p>
+            </form>
+        </div>
+    </div>
+</div>

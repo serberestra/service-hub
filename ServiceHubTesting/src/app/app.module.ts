@@ -18,6 +18,7 @@ import { WorkerlistComponent } from './components/reservation-add/workerlist/wor
 import { WorkerCardComponent } from './components/reservation-add/workerlist/worker-card/worker-card.component';
 import { RegisterCompanyComponent } from './components/register-company/register-company.component';
 import { RegisterWorkerComponent } from './components/register-worker/register-worker.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RegisterWorkerComponent } from './components/register-worker/register-w
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
