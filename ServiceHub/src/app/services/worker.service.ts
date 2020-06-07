@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Worker } from "../models/worker.model";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +25,11 @@ export class WorkerService {
 
   ];
 
-  private selectedWorker = new Subject<Worker>();
+  private selectedWorker: Worker;
   
 
   constructor() { 
-    this.selectedWorker.next(new Worker(-1, '', '', -1, '', -1 )); // I don't know, default value, I don't think it is supposed to work like this.
+    //this.selectedWorker: Worker = {-1, '', '', -1, '', -1 }; // I don't know, default value, I don't think it is supposed to work like this.
   }
 
   getAllWorkers(){
@@ -38,10 +38,10 @@ export class WorkerService {
 
   setWorker(worker: Worker){
     console.log("WorkerService has worker: " + worker.name)
-    this.selectedWorker.next(worker);
+    this.selectedWorker = worker;
   }
 
   getWorker(){
-    return this.selectedWorker.asObservable();
+    return this.selectedWorker;
   }
 }

@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
 export class ReservationAddComponent implements OnInit {
 
   private workerSubscription: Subscription;
-  private worker: Worker = {
+  worker: Worker = {
      id: -1,
-     name: "",
+     name: "default",
      lastName: "",
      companyId: -1,
      serviceName: "",
@@ -24,19 +24,19 @@ export class ReservationAddComponent implements OnInit {
 
   ngOnInit(): void {
     //this.worker = this.ws.getWorker();
-    this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker)=> {
-      this.worker = {id: worker.id, name: worker.name, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName, status: worker.status};
-    });
-    console.log("ngOnInit: ReservationAddComponent's worker.name: "+this.worker.name);
+    // this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker)=> {
+    //   this.worker = {id: worker.id, name: worker.name, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName, status: worker.status};
+    // });
+    // console.log("ngOnInit: ReservationAddComponent's worker.name: "+this.worker.name);
   }
 
   onSubmit(){
     
   }
 
-  ngOnDestroy() {
-    //this.workerSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.workerSubscription.unsubscribe();
+  // }
 
 }
 
