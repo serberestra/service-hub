@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
+import { User } from "../../models/user.model";
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,14 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+//   user: User = {
+
+//     id: "",
+//     username: "",
+//     password: "",
+//     userType: "",
+//     phoneNumber: ""
+// };  While the Login works, we Might need to Instantiate
 
   constructor(
     private authService: AuthService,
@@ -21,25 +30,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit() {
 
-    if (form.value.invalid) {
-      return;
-    }
+    console.log("yes this onSubit ran");
 
-    /**
-     * likely use this commented out version when Post Method will return a Promise ?
-     */
-    // this.authService.login(this.username, this.password).then(res => console.log(res)).catch(err => console.log(err));
-    
-    if (this.authService.login(form.value.username, form.value.password)) {
-      console.log("successful Login Router away...");
-      this.router.navigate(['/reservationAdd']); // reservationAdd  // useroptions
-    } else {
-      console.log("unsuccessful Login stay at Login...");
-    }
+    this.authService.login(this.username, this.password).toPromise().then(res=>{
 
-    form.resetForm();
+      console.log("this is response "+res);
+      if (res !== null) {
+        console.log(res.id);
+        console.log(res.username);
+        console.log(res.password);
+        console.log(res.userType);
+        console.log(res.phoneNumber);
+
+        this.router.navigate(['/reservationAdd']);
+      }
+
+    }).catch(err => {
+      console.log("This is the ERROR: " + err);
+    });
     
   }
 

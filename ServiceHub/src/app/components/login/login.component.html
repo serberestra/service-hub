@@ -25,7 +25,8 @@
 
               <!-- FORM -->
               <!--  role="form" -->
-              <form ngNativeValidate (submit)="onSubmit(postForm)" #postForm="ngForm">
+              <!-- ngNativeValidate  (submit)="onSubmit(postForm)"  #postForm="ngForm" -->
+              <form ngNativeValidate (submit)="onSubmit()" >
                 <div class="form-group">
                   <label for="username">Username</label>
                   <input name="username" id="username" [(ngModel)]="username" required type="text" class="form-control">
