@@ -9,7 +9,7 @@ import { Worker } from "../../../models/worker.model";
 })
 export class WorkerlistComponent implements OnInit {
 
-  
+  workers: Worker[];
   
 
   constructor(
@@ -17,7 +17,11 @@ export class WorkerlistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.ws.getAllWorkers().subscribe(workers => {
+      this.workers = workers;
+      console.log("this.workers.length: " + this.workers.length);
+    });
   }
 
-  workers: Worker[] = this.ws.getAllWorkers();
+  //workers: Worker[] = this.ws.getAllWorkers();
 }

@@ -3,11 +3,23 @@ export class Worker {
     constructor(
 
         public id: number,
-        public name: string,
+        public firstName: string,
         public lastName: string,
         public companyId: number,
-        public serviceName: string,
-        public status: number
+        public serviceName: string
     ){}
+
+    
+       // public status: number
+
+       /**
+   *   {
+        "id": 1001,
+        "firstName": "Rich",
+        "lastName": "Black",
+        "companyId": 5001,
+        "serviceName": "Gutter Clean"
+    },
+   */
 
 }

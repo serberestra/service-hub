@@ -20,7 +20,7 @@ export class WorkerCardComponent implements OnInit {
   }
 
   onSelect( worker: Worker ){
-    console.log("WorkerCardComponent : " + worker.name);
+    console.log("WorkerCardComponent : " + worker.firstName);
     this.ws.setWorker(worker);
     //this.router.navigate(['/reservationAdd']);  this did not trigger reservation-add ngOnInit to fire.
   }

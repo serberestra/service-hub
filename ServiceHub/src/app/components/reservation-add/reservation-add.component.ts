@@ -13,30 +13,31 @@ export class ReservationAddComponent implements OnInit {
   private workerSubscription: Subscription;
   worker: Worker = {
      id: -1,
-     name: "default",
+     firstName: "",
      lastName: "",
      companyId: -1,
      serviceName: "",
-     status: -1
-  };
+    
+  };  //  status: -1
+  
 
   constructor(private ws: WorkerService) { }
 
   ngOnInit(): void {
     //this.worker = this.ws.getWorker();
-    // this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker)=> {
-    //   this.worker = {id: worker.id, name: worker.name, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName, status: worker.status};
-    // });
-    // console.log("ngOnInit: ReservationAddComponent's worker.name: "+this.worker.name);
+    this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker)=> {
+      this.worker = {id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName};
+    });
+    console.log("ngOnInit: ReservationAddComponent's worker.firstName: "+this.worker.firstName);
   }
 
   onSubmit(){
     
   }
 
-  // ngOnDestroy() {
-  //   this.workerSubscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.workerSubscription.unsubscribe();
+  }
 
 }
 

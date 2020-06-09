@@ -14,8 +14,8 @@
 
  <div class="card mb-1">
      <div class="card-header">{{ worker.serviceName }}</div>
-     <div class="card-body">{{ worker.name }} {{ worker.lastName }}</div>
-     <div class="card-footer">status: {{ worker.status }}<button (click)="onSelect( worker )" class="btn btn-sm btn-outline-primary ml-4">Select</button></div>
+     <div class="card-body">{{ worker.firstName }} {{ worker.lastName }}</div>
+     <div class="card-footer">status: <button (click)="onSelect( worker )" class="btn btn-sm btn-outline-primary ml-4">Select</button></div>
  </div>
 
  
