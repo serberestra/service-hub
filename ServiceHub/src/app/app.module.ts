@@ -21,6 +21,7 @@ import { RegisterWorkerComponent } from './components/register-worker/register-w
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { WorkerListComponent } from './components/company-page/worker-list/worker-list.component';
 import { UpdateFormComponent } from './components/company-page/update-form/update-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UpdateFormComponent } from './components/company-page/update-form/updat
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
