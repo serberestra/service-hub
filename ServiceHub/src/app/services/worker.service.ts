@@ -35,30 +35,37 @@ export class WorkerService {
   //    new Worker(4, 'Jay', 'Anderson', 1, 'Lawn Care', 1 )
 
   // ];
-
-  private workers: Observable<Worker[]>;
+  private url: string;
+  private workers: Worker[];
 
   // private selectedWorker: Worker;
   private selectedWorker = new Subject<Worker>();
-  
+
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     //this.selectedWorker: Worker = {-1, '', '', -1, '', -1 }; // I don't know, default value, I don't think it is supposed to work like this.
   }
 
-  getAllWorkers(): Observable<Worker[]>{
+  getAllWorkers(): Observable<Worker[]> {
     //return this.workers;
     return this.http.get<Worker[]>('http://localhost:9191/api/worker/worker');
   }
 
-  setWorker(worker: Worker){
+  setWorker(worker: Worker) {
     console.log("WorkerService has worker: " + worker.firstName)
     this.selectedWorker.next(worker);
   }
 
-  getWorker(){
+  getWorker() {
     return this.selectedWorker;
+  }
+
+  getCompanyWorkers(): Observable<Worker[]> {
+    return this.http.get<Worker[]>(this.url + "company");
+  }
+  delete(id: number) {
+    this.http.delete(this.url + id);
   }
 }
