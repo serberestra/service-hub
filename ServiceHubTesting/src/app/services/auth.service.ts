@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/user.model";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,11 @@ export class AuthService {
     password: "",
     userType: "",
     phoneNumber: ""
-};
+  };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private _route: Router
   ) { }
 
   login(username: string, password: string) {
@@ -45,12 +47,33 @@ export class AuthService {
     /**
      * just a temporary thing to get things going till we get endpoints
      */
-    if (username === 'test' && password === 'test' ) {
+    if (username === 'test' && password === 'test') {
       return true;
     } else {
       return false;
     }
 
-    
+  }
+  clear(): void {
+    localStorage.clear();
+  }
+
+  isAuthenticated(): boolean {
+    return localStorage.getItem('user') !== null;
+  }
+
+  companyLogin(): void {
+    localStorage.setItem('user', 'yes');
+    this._route.navigate(['/dashboard']);
+  }
+
+  userlogin(): void {
+    localStorage.setItem('user', 'yes');
+    this._route.navigate(['/dashboard']);
+  }
+
+  logout(): void {
+    this.clear();
+    this._route.navigate(['/login']);
   }
 }
