@@ -1,0 +1,19 @@
+<form ngNativeValidate (submit)="update()">
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" name="fName" [(ngModel)]="fName" pattern="[a-zA-Z]*" required
+                    value={{worker.firstName}}></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" name="lName" [(ngModel)]="lName" pattern="[a-zA-Z]*" required
+                    value={{worker.lastName}}></td>
+        </tr>
+        <tr>
+            <td>Service</td>
+            <td><input type="text" name="sName" [(ngModel)]="sName" required value={{worker.serviceName}}></td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-primary" value="Update">
+</form>

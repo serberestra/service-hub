@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Worker } from "../../../models/worker.model";
-import { WorkerService } from '../../../services/worker.service';
+import { Worker } from "../../../../models/worker.model";
+import { WorkerService } from '../../../../services/worker.service';
 
 @Component({
   selector: 'app-worker-list',
@@ -23,12 +23,13 @@ export class WorkerListComponent implements OnInit {
   }
 
   Delete(id: number): void {
-    this.service.delete(id);
+    this.service.delete(id)
+      .subscribe(data => console.log(data));
   }
 
   Update(upWorker: Worker): void {
     this.sight = true
-    this.uWorker = upWorker;
+    this.service.setWorker(upWorker);
   }
 
 }

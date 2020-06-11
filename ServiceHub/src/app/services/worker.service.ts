@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Worker } from "../models/worker.model";
 import { Subject, Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -63,9 +63,18 @@ export class WorkerService {
   }
 
   getCompanyWorkers(): Observable<Worker[]> {
-    return this.http.get<Worker[]>(this.url + "company");
+    return this.http.get<Worker[]>('http://localhost:9191/api/workers/company/5001');
   }
-  delete(id: number) {
-    this.http.delete(this.url + id);
+
+  delete(id: number): Observable<any> {
+    return this.http.delete('http://localhost:9191/api/worker/' + id);
   }
+
+  update(work: Worker): Observable<Worker> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let url = 'http://localhost:9191/api/worker';
+    return this.http.put<Worker>(url, work, { headers: headers })
+  }
+
 }

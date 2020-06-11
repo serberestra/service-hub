@@ -12,13 +12,13 @@
             <td>{{worker.name}} {{worker.lastName}}</td>
             <td>{{worker.serviceName}}</td>
             <td>{{worker.status}}</td>
-            <td><button class="btn btn-sm btn-outline-primary ml-4" onclick="Update('worker')">
+            <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Update(worker)">
                     Update</button></td>
-            <td><button class="btn btn-sm btn-outline-primary ml-4" onclick="Delete('worker.id')">
+            <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Delete(worker.id)">
                     Remove</button></td>
         </tr>
     </table>
 </div>
 <div ng-show="sight">
-    <app-update-form [cWorker]="uWorker"></app-update-form>
+    <app-update-form></app-update-form>
 </div>

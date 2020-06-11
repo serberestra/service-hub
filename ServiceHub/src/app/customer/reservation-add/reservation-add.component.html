@@ -1,0 +1,50 @@
+<p>reservation-add works!</p>
+
+<div class="row">
+  <div class="col-7">
+    <h5 style="padding-top: 60px;">Filtering Controls Here</h5>
+    <h6 style="padding-top: 75px;">Reservation Form Here</h6>
+
+    <section class="mt-5">
+      <!-- container below -->
+      <div class="">
+        <!-- row below -->
+        <div class="">
+          <!-- col-md-10 -->
+          <div class="">
+            <div class="card mr-5">
+              <div class="card-header">
+                <h4>Get a Service</h4>
+              </div>
+              <div class="card-body">
+                <form ngNativeValidate (submit)="onSubmit()">
+                  <!-- [(ngModel)]="reservation.date" -->
+                  <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="start" name="trip-start" value="2020-06-14" min="2020-01-01" max="2021-12-31"
+                      required [(ngModel)]="reservation.date">
+
+                  </div>
+                  <div class="form-group">
+                    <label for="service">Service:</label>
+                    <!-- [(ngModel)]="worker.name" -->
+                    <input name="service" id="username" [(ngModel)]="worker.serviceName" required readonly type="text"
+                      class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Worker:</label>
+                    <!-- [(ngModel)]="worker.firstName" -->
+                    <input id="pass" [(ngModel)]="worker.firstName" required readonly name="password" type="text"
+                      class="form-control">
+                  </div>
+                  <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-service-list class="col-5"></app-service-list>
+</div>

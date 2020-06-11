@@ -9,19 +9,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ServiceAddComponent } from './components/service-add/service-add.component';
-import { ServiceEditComponent } from './components/service-edit/service-edit.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
-import { ReservationAddComponent } from './components/reservation-add/reservation-add.component';
-import { WorkerlistComponent } from './components/reservation-add/workerlist/workerlist.component';
-import { WorkerCardComponent } from './components/reservation-add/workerlist/worker-card/worker-card.component';
 import { RegisterCompanyComponent } from './components/register-company/register-company.component';
-import { RegisterWorkerComponent } from './components/register-worker/register-worker.component';
-import { CompanyPageComponent } from './components/company-page/company-page.component';
-import { WorkerListComponent } from './components/company-page/worker-list/worker-list.component';
-import { UpdateFormComponent } from './components/company-page/update-form/update-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Module To import Company
+import { CompanyModule } from '../app/company/company.module';
+import { CustomerModule } from '../app/customer/customer.module';
 
 @NgModule({
   declarations: [
@@ -30,18 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
-    ServiceAddComponent,
-    ServiceEditComponent,
     FilterPipe,
     FooterComponent,
-    ReservationAddComponent,
-    WorkerlistComponent,
-    WorkerCardComponent,
     RegisterCompanyComponent,
-    RegisterWorkerComponent,
-    CompanyPageComponent,
-    WorkerListComponent,
-    UpdateFormComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CompanyModule,
+    CustomerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

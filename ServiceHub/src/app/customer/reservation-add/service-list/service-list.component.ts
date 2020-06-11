@@ -3,14 +3,14 @@ import { WorkerService } from "../../../services/worker.service";
 import { Worker } from "../../../models/worker.model";
 
 @Component({
-  selector: 'app-workerlist',
-  templateUrl: './workerlist.component.html',
-  styleUrls: ['./workerlist.component.scss']
+  selector: 'app-service-list',
+  templateUrl: './service-list.component.html',
+  styleUrls: ['./service-list.component.scss']
 })
-export class WorkerlistComponent implements OnInit {
+export class SerivicelistComponent implements OnInit {
 
   workers: Worker[];
-  
+
 
   constructor(
     private ws: WorkerService

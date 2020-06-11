@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
-//   user: User = {
+  //   user: User = {
 
-//     id: "",
-//     username: "",
-//     password: "",
-//     userType: "",
-//     phoneNumber: ""
-// };  While the Login works, we Might need to Instantiate
+  //     id: "",
+  //     username: "",
+  //     password: "",
+  //     userType: "",
+  //     phoneNumber: ""
+  // };  While the Login works, we Might need to Instantiate
 
   constructor(
     private authService: AuthService,
@@ -34,23 +34,28 @@ export class LoginComponent implements OnInit {
 
     console.log("yes this onSubit ran");
 
-    this.authService.login(this.username, this.password).toPromise().then(res=>{
+    // this.authService.login(this.username, this.password).toPromise().then(res=>{
 
-      console.log("this is response "+res);
-      if (res !== null) {
-        console.log(res.id);
-        console.log(res.username);
-        console.log(res.password);
-        console.log(res.userType);
-        console.log(res.phoneNumber);
+    //   console.log("this is response "+res);
+    //   if (res !== null) {
+    //     console.log(res.id);
+    //     console.log(res.username);
+    //     console.log(res.password);
+    //     console.log(res.userType);
+    //     console.log(res.phoneNumber);
 
-        this.router.navigate(['/reservationAdd']);
-      }
+    //     this.router.navigate(['/reservationAdd']);
+    //   }
 
-    }).catch(err => {
-      console.log("This is the ERROR: " + err);
-    });
-    
+    // }).catch(err => {
+    //   console.log("This is the ERROR: " + err);
+    // });
+
+    this.authService.login(this.username, this.password)
+      .subscribe(res => {
+        console.log(res);
+      })
+
   }
 
 }
