@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Module To import Company
 import { CompanyModule } from '../app/company/company.module';
 import { CustomerModule } from '../app/customer/customer.module';
+import { ServiceHistoryComponent } from './company/components/company-page/service-history/service-history.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CustomerModule } from '../app/customer/customer.module';
     FilterPipe,
     FooterComponent,
     RegisterCompanyComponent,
+    ServiceHistoryComponent,
   ],
   imports: [
     BrowserModule,
