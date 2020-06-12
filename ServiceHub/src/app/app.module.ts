@@ -17,7 +17,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Module To import Company
 import { CompanyModule } from '../app/company/company.module';
 import { CustomerModule } from '../app/customer/customer.module';
+<<<<<<< HEAD
 import { ServiceHistoryComponent } from './company/components/company-page/service-history/service-history.component';
+=======
+// Modules Angular Material
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+>>>>>>> master
 
 @NgModule({
   declarations: [
@@ -39,7 +46,10 @@ import { ServiceHistoryComponent } from './company/components/company-page/servi
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CompanyModule,
-    CustomerModule
+    CustomerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

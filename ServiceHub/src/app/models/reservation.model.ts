@@ -4,7 +4,7 @@ export class Reservation {
         public id: number,
         public bookBy: number,      // is user id
         public workerId: number,
-        public date: Date,
+        public date: Date, //Date
         public status: boolean,  // will change to a string soon  !!
 
         

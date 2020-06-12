@@ -4,6 +4,7 @@ import { NotFoundComponent } from "../app/components/not-found/not-found.compone
 import { LoginComponent } from "../app/components/login/login.component";
 import { RegisterComponent } from "../app/components/register/register.component";
 import { RegisterCompanyComponent } from './components/register-company/register-company.component';
+import { ReservationAddComponent } from "./customer/reservation-add/reservation-add.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: "useroptions", component: NotFoundComponent },
   { path: "register", component: RegisterComponent },
   { path: "registerCompany", component: RegisterCompanyComponent },
+  { path: "reservationAdd", component: ReservationAddComponent },
 ];
 
 @NgModule({
