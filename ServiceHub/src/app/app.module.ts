@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Module To import Company
 import { CompanyModule } from '../app/company/company.module';
 import { CustomerModule } from '../app/customer/customer.module';
+import { ReservationEditComponent } from './customer/reservation-edit/reservation-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CustomerModule } from '../app/customer/customer.module';
     FilterPipe,
     FooterComponent,
     RegisterCompanyComponent,
+    ReservationEditComponent,
   ],
   imports: [
     BrowserModule,
