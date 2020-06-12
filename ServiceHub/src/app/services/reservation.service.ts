@@ -14,6 +14,8 @@ export class ReservationService {
 
 
   /**
+   * 
+   * POST  a new reservation
    *    
    * @param reservation {
     "id": 2,                  needs this but that should not be...
@@ -21,12 +23,12 @@ export class ReservationService {
     "workerId": 3,            yes
     "date": "10/10/2020",     ...
     "status": 1               boolean/1 to change to string...
-}
+    }
    */
+  register(reservation: Reservation) {
+    console.log("for ReservationService: bookBy: " + reservation.bookBy);
+    return this.http.post<Reservation>('http://localhost:9191/api/reservation', reservation);
 
-  // post to add a new reservation
-  register(reservation: Reservation){
-    return this.http.get<Reservation>('http://localhost:9191/api/reservation/create');
   }
 
 }

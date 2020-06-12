@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
-  //   user: User = {
+    user: User = {
 
-  //     id: "",
-  //     username: "",
-  //     password: "",
-  //     userType: "",
-  //     phoneNumber: ""
-  // };  While the Login works, we Might need to Instantiate
+      id: "",
+      username: "",
+      password: "",
+      userType: "",
+      phoneNumber: ""
+  };  //While the Login works, we Might need to Instantiate
 
   constructor(
     private authService: AuthService,
@@ -53,7 +53,19 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.username, this.password)
       .subscribe(res => {
-        console.log(res);
+        console.log("res in login: " + res);
+        console.log("res in login: " + res.username);
+        console.log("res in login: " + res.id);
+        
+        this.user = {id:res.id, username:res.username, password:res.password, userType:res.userType, phoneNumber:res.phoneNumber};
+
+        
+        if (res !== null) {
+          // this.authService.setLogged_in_user(res);
+          
+          this.authService.setLogged_in_user(this.user);
+          this.router.navigate(['/reservationAdd']);
+        }
       })
 
   }

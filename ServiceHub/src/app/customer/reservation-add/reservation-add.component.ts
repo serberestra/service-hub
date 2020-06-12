@@ -5,11 +5,15 @@ import { Subscription } from 'rxjs';
 import { Reservation } from "../../models/reservation.model";
 import { formatDate } from '@angular/common';
 import { ReservationService } from "../../services/reservation.service";
+import { DatePipe } from '@angular/common';
+import { AuthService } from "../../services/auth.service";
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-reservation-add',
   templateUrl: './reservation-add.component.html',
-  styleUrls: ['./reservation-add.component.scss']
+  styleUrls: ['./reservation-add.component.scss'],
+  providers:[DatePipe]
 })
 export class ReservationAddComponent implements OnInit {
 
@@ -27,18 +31,34 @@ export class ReservationAddComponent implements OnInit {
     id: 4,
     bookBy: -9,      // is user id
     workerId: -9,
-    date: new Date(),        //  date: new Date(),   date is too difficult to deal with... ... ..
+    date: new Date(),         //  date: new Date(),  "2020/06/18"
     status: true
   };
 
+  private userSubscription: Subscription;
+  private user: User = {
 
+    id: "",
+    username: "",
+    password: "",
+    userType: "",
+    phoneNumber: ""
+  };
+
+  
   constructor(
+    private as: AuthService,
     private ws: WorkerService,
-    private rs: ReservationService
+    private rs: ReservationService,
+    public datePipe : DatePipe
   ) {
-    //this.reservation.date = this.datePipe.transform(this.reservation.date, 'yyyy-MM-dd');
-    console.log("this is date property : !!  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
+
+    console.log("Before Formatting date property : !!  " + this.reservation.date);
+    //this.reservation.date = this.datePipe.transform(this.reservation.date, 'yyyy-MM-dd');                    // WORKED WITH STRING
+    // console.log("this is date property : !!  " + formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
+    
     this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
+    console.log("After Formatting: this is date property : !!  " + this.reservation.date);
     //this.reservation.date = formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US').toString();
   }
 
@@ -49,11 +69,19 @@ export class ReservationAddComponent implements OnInit {
       this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
     });
     console.log("ngOnInit: ReservationAddComponent's worker.firstName: " + this.worker.firstName);
+
+    this.userSubscription = this.as.getLogged_in_user().subscribe((user: User) => {
+      this.user = {id:user.id, username:user.username, password:user.password, userType:user.userType, phoneNumber:user.phoneNumber};
+    });
+    console.log("ReservationAddComponent Has: " + this.user.id);
+    console.log("ReservationAddComponent Has: " + this.user.username);
+
   }
 
 
   ngOnDestroy() {
     this.workerSubscription.unsubscribe();
+    //this.userSubscription.unsubscribe();
   }
 
   onSubmit() {
@@ -72,18 +100,51 @@ export class ReservationAddComponent implements OnInit {
     // "date": "10/10/2020",     ...
     // "status": true               boolean/1 to change to string...
 
-    this.reservation.id = 1; // id does not matter since it will be generated
-    this.reservation.bookBy = this.worker.id;       // needs to become User.id ..................
+
+
+
+
+
+
+    /**
+     * FOR OBSERVABLE..remember to delete the
+     */
+    // this.as.getLogged_in_user().subscribe((user: User) => {
+    //   console.log("this is user: " + user);
+      
+    // });
+
+
+    // this.userSubscription = this.as.getLogged_in_user().subscribe((user: User) => {
+    //   this.user = {id:user.id, username:user.username, password:user.password, userType:user.userType, phoneNumber:user.phoneNumber};
+    // });
+    // console.log("ReservationAddComponent Has: " + this.user.id);
+    // console.log("ReservationAddComponent Has: " + this.user.username);
+
+
+
+
+    this.reservation.id = 99; // id does not matter since it will be generated
+
+
+    console.log("SHOULD NOT be NULL: --->" + this.user.id);
+    this.reservation.bookBy = +this.user.id;// parse a String to a Number  // needs to become User.id ..................
+    
+    // I WAS USING THIS BUT I DONT THINK IT WAS WORKING
+    //this.reservation.bookBy = 11;
     this.reservation.workerId = this.worker.id;
     // I might have to conver formatting of date given: reservation.date set by HTML
     //this.reservation.date is set
     this.reservation.status = true;
 
+    //console.log("here is the date: " + new Date(this.reservation.date));
+    console.log("After DatePicker: this is the date: " + this.reservation.date);
 
-    this.reservation.date = new Date(formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));    // if your trying to use a date, try this ...
+    // this.reservation.date = new Date(formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));    // if your trying to use a date, try this ...
+    //this.reservation.date = new Date(this.reservation.date);    // I THINK THIS JUST SET TODAYS DATE AFTER THE DATE PICKER, THIS WONT WORK ...
+
     //this.reservation.date = formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
-    console.log("Reformatted date property is:  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
-
+    //console.log("Reformatted date property is:  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
     this.rs.register(this.reservation).toPromise().then(res => console.log(res)).catch(err => console.log(err));
   }
 }

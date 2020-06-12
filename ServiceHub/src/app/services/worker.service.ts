@@ -50,7 +50,7 @@ export class WorkerService {
 
   getAllWorkers(): Observable<Worker[]> {
     //return this.workers;
-    return this.http.get<Worker[]>('http://localhost:9191/api/worker/worker');
+    return this.http.get<Worker[]>('http://localhost:9191/api/workers');// http://localhost:9191/api/worker/worker
   }
 
   setWorker(worker: Worker) {
