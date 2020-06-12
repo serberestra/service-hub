@@ -13,7 +13,7 @@ import { User } from 'src/app/models/user.model';
   selector: 'app-reservation-add',
   templateUrl: './reservation-add.component.html',
   styleUrls: ['./reservation-add.component.scss'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class ReservationAddComponent implements OnInit {
 
@@ -45,18 +45,18 @@ export class ReservationAddComponent implements OnInit {
     phoneNumber: ""
   };
 
-  
+
   constructor(
     private as: AuthService,
     private ws: WorkerService,
     private rs: ReservationService,
-    public datePipe : DatePipe
+    public datePipe: DatePipe
   ) {
 
     console.log("Before Formatting date property : !!  " + this.reservation.date);
     //this.reservation.date = this.datePipe.transform(this.reservation.date, 'yyyy-MM-dd');                    // WORKED WITH STRING
     // console.log("this is date property : !!  " + formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
-    
+
     this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
     console.log("After Formatting: this is date property : !!  " + this.reservation.date);
     //this.reservation.date = formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US').toString();
@@ -64,6 +64,10 @@ export class ReservationAddComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.as.loggedUser.subscribe(result => {
+      console.log('im in reservation add user', result);
+      this.user = result;
+    })
     //this.worker = this.ws.getWorker();
     this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker) => {
       this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
@@ -71,7 +75,7 @@ export class ReservationAddComponent implements OnInit {
     console.log("ngOnInit: ReservationAddComponent's worker.firstName: " + this.worker.firstName);
 
     this.userSubscription = this.as.getLogged_in_user().subscribe((user: User) => {
-      this.user = {id:user.id, username:user.username, password:user.password, userType:user.userType, phoneNumber:user.phoneNumber};
+      this.user = { id: user.id, username: user.username, password: user.password, userType: user.userType, phoneNumber: user.phoneNumber };
     });
     console.log("ReservationAddComponent Has: " + this.user.id);
     console.log("ReservationAddComponent Has: " + this.user.username);
@@ -111,7 +115,7 @@ export class ReservationAddComponent implements OnInit {
      */
     // this.as.getLogged_in_user().subscribe((user: User) => {
     //   console.log("this is user: " + user);
-      
+
     // });
 
 
@@ -129,7 +133,7 @@ export class ReservationAddComponent implements OnInit {
 
     console.log("SHOULD NOT be NULL: --->" + this.user.id);
     this.reservation.bookBy = +this.user.id;// parse a String to a Number  // needs to become User.id ..................
-    
+
     // I WAS USING THIS BUT I DONT THINK IT WAS WORKING
     //this.reservation.bookBy = 11;
     this.reservation.workerId = this.worker.id;
