@@ -1,49 +1,61 @@
-<h3>Request Service From Service History</h3>
+<p>reservation-request-old works!</p>
+
+
+
+<h5>Request Service From Service History</h5>
 <div class="row">
-  <div class="col-12 col-md-4">
+    <div class="col-7">
 
-    <section class="mt-5">
-      <!-- container below -->
-      <div class="">
-        <!-- row below -->
-        <div class="">
-          <!-- col-md-10 -->
-          <div class="">
-            <div class="card mr-5">
-              <div class="card-header">
-                <h4>Reserve Same Service</h4>
-              </div>
-              <div class="card-body">
-                <form ngNativeValidate (submit)="onSubmit()">
-                  <!-- [(ngModel)]="reservation.date"                    id="start" name="trip-start" -->
-                  <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" name="date" value="2020-06-14" min="2020-01-01" max="2021-12-31">
-
+        <section class="mt-5">
+            <!-- container below -->
+            <div class="">
+              <!-- row below -->
+              <div class="">
+                <!-- col-md-10 -->
+                <div class="">
+                  <div class="card mr-5">
+                    <div class="card-header">
+                      <h4>Reserve Same Service</h4>
+                    </div>
+                    <div class="card-body">
+                      <form ngNativeValidate (submit)="onSubmit()">
+                        <!-- [(ngModel)]="reservation.date"  reservationCatcher                  id="start" name="trip-start" -->
+                        <div class="form-group">
+                          <label for="date">Date:</label>
+                          <input type="date" name="date"  value="2020-06-14" min="2020-01-01" max="2021-12-31"
+                            [(ngModel)]="reservationCatcher.reservationDate" 
+                          >
+        
+                        </div>
+                        <div class="form-group">
+                          <label for="service">Service:</label>
+                          <!-- [(ngModel)]="worker.serviceName" -->
+                          <input name="service" id="username"  required readonly type="text"
+                            class="form-control"
+                            [(ngModel)]="reservationCatcher.service"
+                            >
+                        </div>
+                        <div class="form-group">
+                          <label for="password">Worker:</label>
+                          <!-- [(ngModel)]="worker.firstName" firstName-->
+                          <input id="pass"  required readonly name="password" type="text"
+                            class="form-control"
+                            [(ngModel)]="reservationCatcher.firstName"
+                            >
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                      </form>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="service">Service:</label>
-                    <!-- [(ngModel)]="worker.serviceName" -->
-                    <input name="service" id="username" required readonly type="text" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Worker:</label>
-                    <!-- [(ngModel)]="worker.firstName" -->
-                    <input id="pass" required readonly name="password" type="text" class="form-control">
-                  </div>
-                  <input type="submit" class="btn btn-primary btn-block" value="Submit">
-                </form>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="col-12 col-md-8">
-    <h6>Existing & Past Services</h6>
+          </section>
+    </div>
+    <div class="col-5">
+        <h6>Existing & Past Services</h6>
 
-    <!-- <div class="mb-4"
+        <div class="mb-4"
             *ngFor="let res of reservationArr">
             <div class="card mb-1">
               <div class="card-header">service: {{ res.service }}</div>
@@ -53,24 +65,9 @@
                 <p>phone: {{ res.contact }} {{ res.lastName }}</p>
                 <p>date of service: {{ res.reservationDate }}</p>
               </div>
-              <div class="card-footer">status: <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Select</button></div>
+              <div class="card-footer">: <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button></div>
             </div>
           
-          </div> -->
-
-    <div class="card mb-3 border-info shadow" *ngFor="let res of reservationArr">
-      <div class="row no-gutters">
-        <div class="card-body">
-          <h5 class="card-title">Service: {{ res.service }}</h5>
-          <h4>Worker: {{ res.firstName }} {{ res.lastName }}</h4>
-          <p class="card-text"><small class="text-muted">Company: {{ res.companyName }}</small></p>
-          <p>phone: {{ res.contact }} {{ res.lastName }}</p>
-          <p>date of service: {{ res.reservationDate }}</p>
-          <a href="javascript:void()" class="card-link" (click)="onSelect( res )">Select</a>
-        </div>
-      </div>
+          </div>
     </div>
-
-
-  </div>
 </div>

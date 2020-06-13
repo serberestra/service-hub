@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
-import { Observable } from "rxjs";
-import { environment } from '../../environments/environment';
-import { ResView } from "../models/resView.model";
-import { Company } from "../models/company.model";
+import { Observable, Subject } from 'rxjs';
+import { ReservationCatcher } from '../models/reservationCatcher.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+
+  private selectedReservationCatcher = new Subject<ReservationCatcher>();
 
   constructor(
     private http: HttpClient
@@ -30,28 +30,38 @@ export class ReservationService {
     }
    */
   register(reservation: Reservation) {
-    console.log("for ReservationService: bookBy: " + reservation['bookBy']);
-    return this.http.post<Reservation>(`${environment.localUrl}reservation`, reservation);
+    console.log("for ReservationService: bookBy: " + reservation.bookedBy);
+    return this.http.post<Reservation>('http://localhost:9191/api/reservation', reservation);
 
   }
 
   /**
-   * Get a list of Reservations by user ID
-   * @param id 
+   * //  http://localhost:9191/api/reservations-view/user/
    */
-  listOfReservationsByUserId(id: number): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${environment.localUrl}reservations-view/user/${id}`);
+  listOfReservationsByUserId(id: string): Observable<ReservationCatcher[]> {
+
+    return this.http.get<ReservationCatcher[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
+
   }
 
   /**
-   * Get company by Id
-   * @param id 
+   * UPDATE ReservationCatcher
+   * @PutMapping("/reservation-view")
    */
-  companyIdGet(id: number): Observable<Company> {
-    return this.http.get<Company>(`${environment.localUrl}company/user/` + id)
+  updateReservationCatcher(resCatcher: ReservationCatcher): Observable<ReservationCatcher> {
+    console.log("this is Date up in ReservationService: " + resCatcher.reservationDate);
+    console.log(resCatcher);
+    // comment
+    
+    return this.http.put<ReservationCatcher>('http://localhost:9191/api/reservation-view', resCatcher);
   }
 
-  getByCompany(id: number): Observable<ResView[]> {
-    return this.http.get<ResView[]>(`${environment.localUrl}reservations-view/company/` + id)
+  setReservationCatcher ( resCatcher: ReservationCatcher ){
+    this.selectedReservationCatcher.next(resCatcher);
   }
+
+  getReservationCatcher ( ){
+    return this.selectedReservationCatcher;
+  }
+
 }
