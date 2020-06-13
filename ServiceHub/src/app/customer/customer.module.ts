@@ -9,12 +9,17 @@ import { WorkerCardComponent } from './reservation-add/service-list/worker-card/
 
 // My routes
 import { customerRoutes } from './customer.routes';
+import { ReservationRequestOldComponent } from './reservation-request-old/reservation-request-old.component';
+import { LayoutComponent } from './layout/layout.component';
+
 
 @NgModule({
   declarations: [
     ReservationAddComponent,
     SerivicelistComponent,
-    WorkerCardComponent
+    WorkerCardComponent,
+    ReservationRequestOldComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,

@@ -1,22 +1,22 @@
 import { Routes } from '@angular/router';
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
-import { WorkerCardComponent } from './reservation-add/service-list/worker-card/worker-card.component';
 import { AuthGuard } from '../services/auth.guard';
+import { ReservationRequestOldComponent } from './reservation-request-old/reservation-request-old.component';
+import { LayoutComponent } from "./layout/layout.component";
 
 
 export const customerRoutes: Routes = [
     {
         path: 'customer',
-        component: ReservationAddComponent,
+        component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
             {
-                path: "worker",
-                component: WorkerCardComponent
-                // path: '',
-                // children: [
-                //     { path: "worker", component: WorkerCardComponent },
-                // ]
+                path: '',
+                children: [
+                    { path: "reservationAdd", component: ReservationAddComponent },
+                    { path: "reservationOld", component: ReservationRequestOldComponent },
+                ]
             }
         ]
     }
