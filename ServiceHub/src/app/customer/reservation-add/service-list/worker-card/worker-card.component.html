@@ -1,21 +1,15 @@
-<p>worker-card works!</p>
-
-
-<!-- 
-    /**
-     *    id?: string,
-          name: string,
-          lastName: string,
-          companyId?: string,
-          serviceName: string,
-          status?: number
-     */
- -->
-
- <div class="card mb-1">
-     <div class="card-header">{{ worker.serviceName }}</div>
-     <div class="card-body">{{ worker.firstName }} {{ worker.lastName }}</div>
-     <div class="card-footer">status: <button (click)="onSelect( worker )" class="btn btn-sm btn-outline-primary ml-4">Select</button></div>
- </div>
-
- 
+<div class="card mb-3 border-info shadow">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="..." class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{worker.serviceName}}</h5>
+                <h4>{{worker.firstName}} {{worker.lastName}}</h4>
+                <p class="card-text"><small class="text-muted">{{worker.companyName}}</small></p>
+                <a href="javascript:void()" class="card-link" (click)="onSelect( worker )">Selected</a>
+            </div>
+        </div>
+    </div>
+</div>

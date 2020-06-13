@@ -15,9 +15,7 @@ export class WorkerService {
   // private selectedWorker: Worker;
   private selectedWorker = new Subject<Worker>();
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     //this.selectedWorker: Worker = {-1, '', '', -1, '', -1 }; // I don't know, default value, I don't think it is supposed to work like this.
   }
 
@@ -27,7 +25,7 @@ export class WorkerService {
 
   getAllWorkers(): Observable<Worker[]> {
     //return this.workers;
-    return this.http.get<Worker[]>('http://localhost:9191/api/workers');// http://localhost:9191/api/worker/worker
+    return this.http.get<Worker[]>(`${environment.localUrl}workers-view`);// http://localhost:9191/api/worker/worker
   }
 
   setWorker(worker: Worker) {

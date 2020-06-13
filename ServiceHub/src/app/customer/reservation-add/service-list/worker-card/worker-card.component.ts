@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Worker } from '../../../../models/worker.model';
 import { WorkerService } from "../../../../services/worker.service";
-import { Router } from "@angular/router";
 
+declare var $: any;
 @Component({
   selector: 'app-worker-card',
   templateUrl: './worker-card.component.html',
@@ -14,15 +14,13 @@ export class WorkerCardComponent implements OnInit {
 
   constructor(
     private ws: WorkerService,
-    private router: Router) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onSelect( worker: Worker ){
-    console.log("WorkerCardComponent : " + worker.firstName);
+  onSelect(worker: Worker) {
     this.ws.setWorker(worker);
-    //this.router.navigate(['/reservationAdd']);  this did not trigger reservation-add ngOnInit to fire.
   }
 
 }

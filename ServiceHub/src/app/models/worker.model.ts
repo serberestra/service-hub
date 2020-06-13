@@ -6,20 +6,8 @@ export class Worker {
         public firstName: string,
         public lastName: string,
         public companyId: number,
-        public serviceName: string
-    ){}
-
-    
-       // public status: number
-
-       /**
-   *   {
-        "id": 1001,
-        "firstName": "Rich",
-        "lastName": "Black",
-        "companyId": 5001,
-        "serviceName": "Gutter Clean"
-    },
-   */
+        public serviceName: string,
+        public companyName?: string
+    ) { }
 
 }

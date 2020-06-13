@@ -16,6 +16,13 @@ import { LayoutComponent } from './layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   declarations: [
     ReservationAddComponent,
@@ -30,7 +37,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class CustomerModule { }

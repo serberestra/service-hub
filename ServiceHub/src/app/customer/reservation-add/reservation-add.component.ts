@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Worker } from "../../models/worker.model";
 import { WorkerService } from "../../services/worker.service";
 import { Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from "../../services/auth.service";
 import { User } from 'src/app/models/user.model';
 
+declare var $: any;
 @Component({
   selector: 'app-reservation-add',
   templateUrl: './reservation-add.component.html',
@@ -25,6 +26,7 @@ export class ReservationAddComponent implements OnInit {
     firstName: "",
     lastName: "",
     companyId: -1,
+    companyName: '',
     serviceName: "",
 
   };  //  status: -1
@@ -52,7 +54,7 @@ export class ReservationAddComponent implements OnInit {
     private as: AuthService,
     private ws: WorkerService,
     private rs: ReservationService,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
   ) {
 
     console.log("Before Formatting date property : !!  " + this.reservation.date);
@@ -72,7 +74,8 @@ export class ReservationAddComponent implements OnInit {
     })
     //this.worker = this.ws.getWorker();
     this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker) => {
-      this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
+      // this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
+      this.worker = worker;
     });
     console.log("ngOnInit: ReservationAddComponent's worker.firstName: " + this.worker.firstName);
 
@@ -83,7 +86,6 @@ export class ReservationAddComponent implements OnInit {
     console.log("ReservationAddComponent Has: " + this.user.username);
 
   }
-
 
   ngOnDestroy() {
     this.workerSubscription.unsubscribe();
@@ -98,7 +100,6 @@ export class ReservationAddComponent implements OnInit {
     console.log(this.worker.lastName);
     console.log(this.worker.serviceName);
     console.log(this.worker.companyId);
-
 
     // "id": 2,                  needs this but that should not be...
     // "bookedBy": "1010",       soon to get User id...
@@ -136,7 +137,7 @@ export class ReservationAddComponent implements OnInit {
     console.log("SHOULD NOT be NULL: --->" + this.user.id);
     this.myString = this.user.id;
     console.log("this is my NEEDED string: " + this.myString);
-    
+
     this.reservation.bookedBy = this.myString;// parse a String to a Number  // needs to become User.id ................
 
     // I WAS USING THIS BUT I DONT THINK IT WAS WORKING
@@ -156,7 +157,5 @@ export class ReservationAddComponent implements OnInit {
     //console.log("Reformatted date property is:  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
     this.rs.register(this.reservation).toPromise().then(res => console.log(res)).catch(err => console.log(err));
   }
+
 }
-
-
-
