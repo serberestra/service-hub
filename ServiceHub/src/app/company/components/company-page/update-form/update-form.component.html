@@ -1,19 +1,22 @@
-<form ngNativeValidate (submit)="update()">
+<div align="center">
+<h3>Update form</h3>
+<form novalidate [formGroup]="updateWorker" (submit)="update()">
     <table>
         <tr>
             <td>First Name</td>
-            <td><input type="text" name="fName" [(ngModel)]="fName" pattern="[a-zA-Z]*" required
+            <td><input type="text" name="fName" formControlName="first"  required
                     value={{worker.firstName}}></td>
         </tr>
         <tr>
             <td>Last Name</td>
-            <td><input type="text" name="lName" [(ngModel)]="lName" pattern="[a-zA-Z]*" required
+            <td><input type="text" name="lName" formControlName="last" required
                     value={{worker.lastName}}></td>
         </tr>
         <tr>
             <td>Service</td>
-            <td><input type="text" name="sName" [(ngModel)]="sName" required value={{worker.serviceName}}></td>
+            <td><input type="text" name="sName" formControlName="serv" required value={{worker.serviceName}}></td>
         </tr>
     </table>
     <input type="submit" class="btn btn-primary" value="Update">
 </form>
+</div>

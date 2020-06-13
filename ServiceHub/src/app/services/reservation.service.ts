@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
-import { Observable } from 'rxjs';
-import { ReservationCatcher } from '../models/reservationCatcher.model';
+import { Observable } from "rxjs";
+import { environment } from '../../environments/environment';
+import { ResView } from "../models/resView.model";
+import { Company } from "../models/company.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,18 +30,16 @@ export class ReservationService {
     }
    */
   register(reservation: Reservation) {
-    console.log("for ReservationService: bookBy: " + reservation.bookedBy);
+    console.log("for ReservationService: bookBy: " + reservation.bookBy);
     return this.http.post<Reservation>('http://localhost:9191/api/reservation', reservation);
 
   }
 
-  /**
-   * //  http://localhost:9191/api/reservations-view/user/
-   */
-  listOfReservationsByUserId(id: string): Observable<ReservationCatcher[]> {
-
-    return this.http.get<ReservationCatcher[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
-
+  companyIdGet(id : number) : Observable<Company>{
+    return this.http.get<Company>(`${environment.localUrl}api/company/user/` + id)
   }
 
+  getByCompany(id : number) : Observable<ResView[]>{
+    return this.http.get<ResView[]>(`${environment.localUrl}api/reservations-view/company/` + id)
+  }  
 }

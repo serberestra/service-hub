@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WorkerService } from "../../../../services/worker.service";
 import { Worker } from "../../../../models/worker.model";
 import { Subscription } from 'rxjs';
-
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 @Component({
   selector: 'app-update-form',
   templateUrl: './update-form.component.html',
@@ -12,10 +12,11 @@ export class UpdateFormComponent implements OnInit {
 
   @Input() cWorker: any;
 
-  fName: string = 'hi';
-  lName: string = 'hi';
-  sName: string = 'hi';
-
+  updateWorker = new FormGroup({
+    first : new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z]*/)]),
+    last : new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z]*/)]),
+    serv : new FormControl('', Validators.required)
+  })
   private Wsubscription: Subscription;
   worker: Worker = {
     id: -1,
@@ -31,13 +32,25 @@ export class UpdateFormComponent implements OnInit {
   ngOnInit(): void {
     this.Wsubscription = this.ws.getWorker().subscribe((worker: Worker) => {
       this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
+      console.log(worker.id)
+      console.log(worker.firstName);
+      console.log(worker.lastName)
+      console.log(worker.serviceName)
     })
   }
+  get first() {return this.updateWorker.get('first')}
+  get last() {return this.updateWorker.get('last')}
+  get serv() {return this.updateWorker.get('serv')}
 
-  update() {
-    this.worker.firstName = this.fName;
-    this.worker.lastName = this.lName;
-    this.worker.serviceName = this.sName;
+  update() { 
+    console.log(this.worker.firstName);
+    if(this.first.value){
+    this.worker.firstName = this.first.value;}
+    if(this.last.value){
+    this.worker.lastName = this.last.value;}
+    if(this.serv.value){
+    this.worker.serviceName = this.serv.value;}
+    console.log(this.worker.firstName);
     this.ws.update(this.worker).subscribe(data => console.log(data));
   }
 
