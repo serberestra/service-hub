@@ -160,7 +160,7 @@ export class ReservationRequestOldComponent implements OnInit {
     
 
         // I should be waiting for a response ideally ..............................................................
-        this.rs.updateReservationCatcher(this.reservationCatcher);
+        this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => console.log(res));
 
   }
 

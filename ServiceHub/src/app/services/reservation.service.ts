@@ -48,8 +48,10 @@ export class ReservationService {
    * UPDATE ReservationCatcher
    * @PutMapping("/reservation-view")
    */
-  updateReservationCatcher(resCatcher: ReservationCatcher) {
+  updateReservationCatcher(resCatcher: ReservationCatcher): Observable<ReservationCatcher> {
     console.log("this is Date up in ReservationService: " + resCatcher.reservationDate);
+    console.log(resCatcher);
+    // comment
     
     return this.http.put<ReservationCatcher>('http://localhost:9191/api/reservation-view', resCatcher);
   }
