@@ -3,6 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
 import { Observable, Subject } from 'rxjs';
 import { ReservationCatcher } from '../models/reservationCatcher.model';
+import { environment } from 'src/environments/environment';
+import { Company } from '../models/company.model';
+import { ResView } from '../models/resView.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,16 +55,29 @@ export class ReservationService {
     console.log("this is Date up in ReservationService: " + resCatcher.reservationDate);
     console.log(resCatcher);
     // comment
-    
+
     return this.http.put<ReservationCatcher>('http://localhost:9191/api/reservation-view', resCatcher);
   }
 
-  setReservationCatcher ( resCatcher: ReservationCatcher ){
+  setReservationCatcher(resCatcher: ReservationCatcher) {
     this.selectedReservationCatcher.next(resCatcher);
   }
 
-  getReservationCatcher ( ){
+  getReservationCatcher() {
     return this.selectedReservationCatcher;
+  }
+
+  /**
+   * Get company by Id
+   * @param id 
+   */
+  getCompanyByUserId(id: number): Observable<Company> {
+    return this.http.get<Company>(`${environment.localUrl}company/user/` + id)
+  }
+  //Corrections getCompanyByUserId and getByCompany
+
+  getByCompany(id: number): Observable<ResView[]> {
+    return this.http.get<ResView[]>(`${environment.localUrl}reservations-view/company/` + id)
   }
 
 }

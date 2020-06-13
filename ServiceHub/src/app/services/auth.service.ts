@@ -47,7 +47,7 @@ export class AuthService {
       .pipe(map((result) => {
         if (result) {
           if (result['userType'] === 'company') {
-            this.reService.companyIdGet(parseInt(result['id']))
+            this.reService.getCompanyByUserId(parseInt(result['id']))
               .subscribe(company => {
                 this.companySource.next(company);
               })
