@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
+import { Company } from '../models/company.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class RegisterService {
    * Method to create a company.
    * @param Company
    */
-  // createCompany(company: company): Observable<Company> {
-  //   return this.http.post<Company>(environment.localUrl + '/company', company);
-  // }
+  createCompany(company: Company): Observable<Company> {
+    return this.http.post<Company>(environment.localUrl + '/company', company);
+  }
 }

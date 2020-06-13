@@ -11,18 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WorkerListComponent implements OnInit {
 
   workers: Worker[];
-  uid : number;
-  cid : number;
+  uid: number;
+  cid: number;
 
-  constructor(private service: WorkerService, private as : AuthService) { }
+  constructor(private service: WorkerService, private as: AuthService) { }
 
   uWorker: Worker;
   sight: boolean = false;
 
   ngOnInit(): void {
-    this.as.loggedUser.subscribe(result=>this.uid=result.id);
+    this.as.loggedUser.subscribe(result => this.uid = result.id);
     console.log(this.uid);
-    this.service.getCompanyWorkers()
+    this.service.getCompanyWorkers(this.uid)
       .subscribe(data => { this.workers = data }
       );
   }

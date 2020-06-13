@@ -1,9 +1,22 @@
-
-
-<h1 style="margin-top: 85px;">ServiceHub</h1>
-<h1>Customer Directory</h1>
-
-<div class="row" style="margin-top: 85px;">
-    <button class="btn btn-primary mr-3" routerLink="reservationAdd">Get Services</button>
-    <button class="btn btn-primary"routerLink="reservationOld">History of Services</button></div>
-    <router-outlet></router-outlet>
+<mat-toolbar class="bg-info-light">
+    <div class="container">
+        <button (click)="sidenav.toggle()" class="btn btn-sm text-white">
+            <em class="fas fa-bars"></em>
+            MENU
+        </button>
+    </div>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" (backdropClick)="close('backdrop')" [hasBackdrop]="true">
+    <mat-sidenav #sidenav mode="side" class="inside-sidenav" [fixedInViewport]="false" [fixedTopGap]="0"
+        [fixedBottomGap]="0" (keydown.escape)="close('escape')">
+        <div class="btn-group-vertical">
+            <a mat-button href="javascript:void()" routerLink="reservationAdd" class="m-1">
+                <em class="fas fa-chevron-circle-right"></em> Get Services</a>
+            <a mat-button href="javascript:void()" routerLink="reservationOld" class="m-1">
+                <em class="fas fa-chevron-circle-right"></em> Records</a>
+        </div>
+    </mat-sidenav>
+    <div class="container mt-3 mb-3">
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

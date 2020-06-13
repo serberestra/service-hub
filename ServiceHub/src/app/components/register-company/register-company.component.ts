@@ -5,6 +5,7 @@ import { RegisterService } from 'src/app/services/register.service';
 import { OpenSnackBarService } from 'src/app/services/open-snack-bar.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { Company } from '../../models/company.model';
 
 @Component({
   selector: 'app-register-company',
@@ -43,13 +44,21 @@ export class RegisterCompanyComponent implements OnInit {
   onSubmit() {
     let user: User = this.registerCompany.value;
     user.userType = 'company';
-    console.log(user);
-    // this.registerService.createCustomer(user)
-    //   .subscribe(result => {
-    //     this.registerCompany.reset({});
-    //     this._snackBar.open('User created successfully', '');
-    //     this.router.navigate(['/login']);
-    //   })
+    this.registerService.createCustomer(user)
+      .subscribe(rUser => {
+        if (rUser) {
+          let company: Company = this.registerCompany.value;
+          company.userId = parseInt(rUser['id']);
+          this.registerService.createCompany(company)
+            .subscribe(rCompany => {
+              if (rCompany) {
+                this.registerCompany.reset({});
+                this._snackBar.open('Company created successfully', '');
+                this.router.navigate(['/login']);
+              }
+            })
+        }
+      })
   }
 
 }

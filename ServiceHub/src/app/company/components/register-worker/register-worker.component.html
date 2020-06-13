@@ -1,45 +1,60 @@
 <div class="row mt-5 d-flex justify-content-center">
-    <div class="card shadow rounded">
-        <div class="card-body">
-            <form class="form-signin needs-validation" novalidate id="fSetup">
-                <h1 class="h3 mb-3 font-weight-normal text-center"><strong>Worker and Service Registration</strong></h1>
-                <h5 class="mb-3 font-weight-normal text-center">Please enter the following information:</h5>
-                <div class="form-group">
-                    <label for="inpWName" class="text-left">* Worker's Name</label>
-                    <input type="text" id="inpWName" class="form-control mb-3" placeholder="Enter the worker's name..."
-                        required>
-                    <div class="invalid-feedback">
-                        Worker's Name is required.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inpWLastName" class="text-left">* Worker's Last Name</label>
-                    <input type="text" id="inpWLastName" class="form-control mb-3"
-                        placeholder="Enter the worker's last name..." required>
-                    <div class="invalid-feedback">
-                        Worker's Last Name is required.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inpService" class="text-left">* Company's Service</label>
-                    <input type="text" id="inpService" class="form-control mb-3"
-                        placeholder="Enter the compnay's service name..." required>
-                    <div class="invalid-feedback">
-                        Company's Service Name is required.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="mr-sm-2" for="selWorkerstatus">* Worker Status:</label>
-                    <select class="custom-select mr-sm-2" id="selWorkerstatus" required>
-                        <option selected value="1">Available</option>
-                        <option value="2">Unavailable</option>
-                    </select>
-                </div>
-                <button class="btn btn-danger btn-block text-uppercase" type="button" id="btnCreate">
-                    <strong>Accept</strong>
-                </button>
-                <p class="mt-4 mb-0 text-muted">Service Hub © 2020</p>
-            </form>
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow rounded">
+            <div class="card-body">
+
+                <form class="form-signin needs-validation" novalidate id="fSetup" [formGroup]="registerWorker"
+                    (ngSubmit)="onSubmit()">
+                    <h1 class="h3 mb-3 font-weight-normal text-center">
+                        <strong>Worker and Service Registration</strong>
+                    </h1>
+                    <h5 class="mb-3 font-weight-normal text-center">Please enter the following information:</h5>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>* Worker's Name</mat-label>
+                        <input type="text" matInput placeholder="" formControlName="firstName"
+                            [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="firstName.hasError('required')">
+                            Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>* Worker's Last Name</mat-label>
+                        <input type="text" matInput placeholder="" formControlName="lastName"
+                            [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="lastName.hasError('required')">
+                            Last Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>* Service</mat-label>
+                        <input type="text" matInput placeholder="" formControlName="serviceName"
+                            [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="serviceName.hasError('required')">
+                            Service is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>* Worker Status</mat-label>
+                        <select matNativeControl required formControlName="status">
+                            <option value="0">Options</option>
+                            <option value="1">Available</option>
+                            <option value="2">Unavailable</option>
+                        </select>
+                        <mat-error *ngIf="status.hasError('required')">
+                            Status is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button class="bg-info btn-block text-uppercase" type="submit"
+                        [disabled]="!registerWorker.valid"><strong>Accept</strong>
+                    </button>
+                    <p class="mt-4 mb-0 text-muted">Service Hub © 2020</p>
+                </form>
+            </div>
         </div>
     </div>
 </div>

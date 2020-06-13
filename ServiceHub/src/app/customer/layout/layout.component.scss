@@ -1,0 +1,20 @@
+.mat-toolbar{
+    height: 40px !important;
+}
+
+.sidenav-container {
+    position: fixed;
+    top: 115px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+}
+
+.inside-sidenav {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    background: #ffffff;
+  }

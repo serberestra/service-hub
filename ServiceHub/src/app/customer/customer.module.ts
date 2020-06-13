@@ -12,6 +12,9 @@ import { customerRoutes } from './customer.routes';
 import { ReservationRequestOldComponent } from './reservation-request-old/reservation-request-old.component';
 import { LayoutComponent } from './layout/layout.component';
 
+// Angular material imports
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { LayoutComponent } from './layout/layout.component';
     CommonModule,
     RouterModule.forChild(customerRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatSidenavModule
   ]
 })
 export class CustomerModule { }
