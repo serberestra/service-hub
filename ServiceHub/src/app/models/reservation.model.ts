@@ -2,7 +2,7 @@ export class Reservation {
 
     constructor(
         public id: number,
-        public bookBy: number,      // is user id
+        public bookedBy: string,      // is user id  //  bookedBy
         public workerId: number,
         public date: Date, //Date
         public status: boolean,  // will change to a string soon  !!

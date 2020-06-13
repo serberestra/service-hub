@@ -9,18 +9,28 @@ import { WorkerCardComponent } from './reservation-add/service-list/worker-card/
 
 // My routes
 import { customerRoutes } from './customer.routes';
+import { ReservationRequestOldComponent } from './reservation-request-old/reservation-request-old.component';
+import { LayoutComponent } from './layout/layout.component';
+
+// Angular material imports
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     ReservationAddComponent,
     SerivicelistComponent,
-    WorkerCardComponent
+    WorkerCardComponent,
+    ReservationRequestOldComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(customerRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatSidenavModule
   ]
 })
 export class CustomerModule { }

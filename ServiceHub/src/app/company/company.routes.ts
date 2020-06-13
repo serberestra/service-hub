@@ -7,12 +7,13 @@ import { AuthGuard } from '../services/auth.guard';
 export const companyRoutes: Routes = [
     {
         path: 'company',
-        component: CompanyPageComponent,
+        component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
             {
                 path: '',
                 children: [
+                    { path: "main", component: CompanyPageComponent },
                     { path: "registerWorker", component: RegisterWorkerComponent },
                 ]
             }
