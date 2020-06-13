@@ -6,7 +6,8 @@ export class Worker {
         public firstName: string,
         public lastName: string,
         public companyId: number,
-        public serviceName: string
+        public serviceName: string,
+        public available? : boolean
     ){}
 
     

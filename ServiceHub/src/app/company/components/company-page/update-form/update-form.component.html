@@ -16,6 +16,10 @@
             <td>Service</td>
             <td><input type="text" name="sName" formControlName="serv" required value={{worker.serviceName}}></td>
         </tr>
+        <tr>
+            <td>Available?</td>
+            <td><input type="checkbox" (change)="onChange($event.target.checked)"></td>
+        </tr>
     </table>
     <input type="submit" class="btn btn-primary" value="Update">
 </form>

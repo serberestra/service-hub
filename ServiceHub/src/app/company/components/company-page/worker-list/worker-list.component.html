@@ -8,11 +8,13 @@
             <th>id</th>
             <th>Name</th>
             <th>Service</th>
+            <th>Available?</th>
         </tr>
         <tr *ngFor="let worker of wFilter">
             <td>{{worker.id}}</td>
             <td>{{worker.firstName}} {{worker.lastName}}</td>
             <td>{{worker.serviceName}}</td>
+            <td>{{worker.available}}</td>
             <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Update(worker)">
                     Update</button></td>
             <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Delete(worker.id)">
