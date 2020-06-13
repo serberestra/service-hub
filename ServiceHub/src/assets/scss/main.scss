@@ -14,3 +14,21 @@ input[type=number] {
 .full-width {
   width: 100% !important;
 }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.footer{
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
+
+.bg-info-light{
+  background-color: #7ed6e4;
+}
+
+.mat-snack-bar-container{
+  margin-bottom: 80px !important;
+}

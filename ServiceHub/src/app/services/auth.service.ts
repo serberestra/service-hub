@@ -38,7 +38,7 @@ export class AuthService {
       'password': password
     };
     // console.log(environment.localUrl);
-    return this.http.post<User>(`${environment.localUrl}api/auth`, user)
+    return this.http.post<User>(`${environment.localUrl}auth`, user)
       .pipe(map((result) => {
         if (result) {
           this.userSource.next(result);
@@ -61,7 +61,7 @@ export class AuthService {
 
   logout(): void {
     this.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
 

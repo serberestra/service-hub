@@ -1,27 +1,24 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-dark fixed-top py-4">
-    <div class="container">
-      <a href="http://localhost:9999/Password/userLogin.html" class="navbar-brand">
-        <img src="img/mlogo.png" width="50" height="50" alt="">
-        <h3 class="d-inline align-middle">ServiceHub</h3>
-      </a>
+<nav class="navbar navbar-dark navbar-expand-md bg-info fixed-top py-4">
+  <div class="container">
+    <a href="javascript:void" class="navbar-brand" routerLink="/">
+      <img src="img/mlogo.png" width="50" height="50" alt="">
+      <h3 class="d-inline align-middle">ServiceHub</h3>
+    </a>
 
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a routerLink="/login" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/register" class="nav-link">Register</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link"></a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">Logout</a>
-          </li>
-        </ul>
-      </div>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/register" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void()" (click)="logout()" class="nav-link">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { FormErrorMatcher } from '../../services/form-error-matcher';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from "@angular/router";
 import { User } from "../../models/user.model";
 
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.email.value, this.password.value)
       .subscribe(result => {
-        console.log(result);
         if (result) {
           if (result.userType === 'company') this.router.navigate(['/company']);
           else this.router.navigate(['/customer']);
