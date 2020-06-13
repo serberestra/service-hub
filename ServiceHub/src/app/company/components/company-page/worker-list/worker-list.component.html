@@ -1,5 +1,6 @@
 
-<input type = 'text' [(ngModel)] = 'inputField' placeholder = 'filter'/>
+<input type = 'text' [(ngModel)] = 'inputField' value="" placeholder = 'filter'/>
+<!-- <select [(ngModel)] = 'inputField' ngOptions="x for serviceName in wFilter" /> -->
 <div align="center">
     <h3>Your Workers</h3>
     <table class="table">
@@ -8,7 +9,7 @@
             <th>Name</th>
             <th>Service</th>
         </tr>
-        <tr *ngFor="let worker of workers">
+        <tr *ngFor="let worker of wFilter">
             <td>{{worker.id}}</td>
             <td>{{worker.firstName}} {{worker.lastName}}</td>
             <td>{{worker.serviceName}}</td>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Worker } from "../../../../models/worker.model";
 import { WorkerService } from '../../../../services/worker.service';
-import { ReservationService } from "../../../../services/reservation.service";
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,7 +15,15 @@ export class WorkerListComponent implements OnInit {
   uid : number;
   cid : number;
 
-  constructor(private service: WorkerService, private as : AuthService) { }
+  constructor(private service: WorkerService, private as : AuthService) { 
+    this.as.loggedCompany.subscribe(result => this.cid = result.id);
+    console.log(this.cid);
+    this.service.getCompanyWorkers(this.cid)
+      .subscribe(data => { this.workers = data;
+      this.wFilter = data }
+      );
+      this.wFilter = this.workers;
+  }
 
   uWorker: Worker;
   sight: boolean = false;
@@ -27,16 +34,10 @@ export class WorkerListComponent implements OnInit {
   }
   set inputField(temp: string){
     this.actualInputfield = temp;
-    this.wFilter = this.actualInputfield?
-    this.performFilter(this.inputField) : this.workers;
+    this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
   }
   ngOnInit(): void {
-    this.as.loggedCompany.subscribe(result => this.cid = result.id);
-    console.log(this.cid);
-    this.service.getCompanyWorkers(this.cid)
-      .subscribe(data => { this.workers = data }
-      );
-      this.wFilter = this.workers;
+
   }
 
   Delete(id: number): void {
