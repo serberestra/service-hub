@@ -40,7 +40,7 @@ export class WorkerService {
   }
 
   getCompanyWorkers(id: number): Observable<Worker[]> {
-    return this.http.get<Worker[]>(`${environment.localUrl}api/workers/company/` + id);
+    return this.http.get<Worker[]>(`${environment.localUrl}workers/company/` + id);
   }
 
   delete(id: number): Observable<any> {
