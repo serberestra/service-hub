@@ -24,23 +24,34 @@ export class UpdateFormComponent implements OnInit {
     lastName: "",
     companyId: -5001,
     serviceName: "",
-
+    available: true
   };
 
   constructor(private ws: WorkerService) { }
 
   ngOnInit(): void {
     this.Wsubscription = this.ws.getWorker().subscribe((worker: Worker) => {
-      this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
-      console.log(worker.id)
+      this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName, available : worker.available
+       };
+      console.log(worker.id);
       console.log(worker.firstName);
-      console.log(worker.lastName)
-      console.log(worker.serviceName)
+      console.log(worker.lastName);
+      console.log(worker.serviceName);
+      console.log(worker.available);
     })
   }
   get first() {return this.updateWorker.get('first')}
   get last() {return this.updateWorker.get('last')}
   get serv() {return this.updateWorker.get('serv')}
+
+  onChange(isChecked : boolean){
+    if(isChecked){
+      this.worker.available=true;
+    }
+    else{
+      this.worker.available=false;
+    }
+  }
 
   update() { 
     console.log(this.worker.firstName);
@@ -51,6 +62,9 @@ export class UpdateFormComponent implements OnInit {
     if(this.serv.value){
     this.worker.serviceName = this.serv.value;}
     console.log(this.worker.firstName);
+    if(!this.worker.available){
+      this.worker.available=false;
+    }
     this.ws.update(this.worker).subscribe(data => console.log(data));
   }
 

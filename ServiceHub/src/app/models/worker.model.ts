@@ -7,7 +7,8 @@ export class Worker {
         public lastName: string,
         public companyId: number,
         public serviceName: string,
-        public companyName?: string
+        public companyName?: string,
+        public available?: boolean
     ) { }
 
 }
