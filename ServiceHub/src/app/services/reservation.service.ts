@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ReservationCatcher } from '../models/reservationCatcher.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+
+  private selectedReservationCatcher = new Subject<ReservationCatcher>();
 
   constructor(
     private http: HttpClient
@@ -40,6 +42,24 @@ export class ReservationService {
 
     return this.http.get<ReservationCatcher[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
 
+  }
+
+  /**
+   * UPDATE ReservationCatcher
+   * @PutMapping("/reservation-view")
+   */
+  updateReservationCatcher(resCatcher: ReservationCatcher) {
+    console.log("this is Date up in ReservationService: " + resCatcher.reservationDate);
+    
+    return this.http.put<ReservationCatcher>('http://localhost:9191/api/reservation-view', resCatcher);
+  }
+
+  setReservationCatcher ( resCatcher: ReservationCatcher ){
+    this.selectedReservationCatcher.next(resCatcher);
+  }
+
+  getReservationCatcher ( ){
+    return this.selectedReservationCatcher;
   }
 
 }

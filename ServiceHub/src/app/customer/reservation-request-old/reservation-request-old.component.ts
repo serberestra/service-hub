@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCatcher } from "../../models/reservationCatcher.model";
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -25,7 +26,25 @@ export class ReservationRequestOldComponent implements OnInit {
       serviceName: "",
   
     };  //  status: -1
-  
+
+    private reservationCatcherSubscription: Subscription;
+     reservationCatcher: ReservationCatcher =
+    {
+      reservationId: "",
+      service: "select card -->",
+      companyId: "",
+      companyName: "",
+      companyAddress: "",
+      contact: "",
+      workerId: "",
+      firstName: "select card -->",
+      lastName: "",
+      reservationDate: "",
+      status: true,
+      userId: "",
+      userName: ""
+   };
+
     reservationArr: ReservationCatcher[] = [
       {
          reservationId: "",
@@ -95,22 +114,53 @@ export class ReservationRequestOldComponent implements OnInit {
          });
         console.log("this is the length of this.reservationArr: " + this.reservationArr.length);
         
+        this.reservationCatcherSubscription = this.rs.getReservationCatcher().subscribe((r: ReservationCatcher)=>{
+          this.reservationCatcher = 
+          {
+            reservationId: r.reservationId,
+            service: r.service,
+            companyId: r.companyId,
+            companyName: r.companyName,
+            companyAddress: r.companyAddress,
+            contact: r.contact,
+            workerId: r.workerId,
+            firstName: r.firstName,
+            lastName: r.lastName,
+            reservationDate: r.reservationDate,
+            status: true,
+            userId: r.userId,
+            userName: r.userName
+         };
+        });
 
   }
 
 
 
-  onSelect( res: ReservationCatcher ) {
 
-    console.log("onSelect of RROldComp: " + res.service);
-    console.log("onSelect of RROldComp: " + res.firstName);
-    console.log("onSelect of RROldComp: " + res.lastName);
+  onSelect( reservation: ReservationCatcher ) {
+
+    console.log("onSelect of RROldComp: " + reservation.service);
+    console.log("onSelect of RROldComp: " + reservation.firstName);
+    console.log("onSelect of RROldComp: " + reservation.lastName);
+
+    this.rs.setReservationCatcher(reservation);
+
   }
 
-  onSubmit() {
+    /**
+   * SELECTING FROM LIST ON THE RIGHT IN TEMPLATE
+   * @param reservation: the ReservationCatcher object to update 
+   */
+  onSubmit(  ) {
 
         // submit the edited reservation to a service
     // in Reservation
+    console.log("this is Date: " + this.reservationCatcher.reservationDate);
+    
+
+        // I should be waiting for a response ideally ..............................................................
+        this.rs.updateReservationCatcher(this.reservationCatcher);
 
   }
 

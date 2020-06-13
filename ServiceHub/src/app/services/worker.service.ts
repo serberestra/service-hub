@@ -8,33 +8,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class WorkerService {
 
-  /**
-   *   {
-        "id": 1001,
-        "firstName": "Rich",
-        "lastName": "Black",
-        "companyId": 5001,
-        "serviceName": "Gutter Clean"
-    },
-   */
-
-  // private workers: Worker[] = [
-
-  //   /**
-  //    *    id?: string,
-  //         name: string,
-  //         lastName: string,
-  //         companyId?: string,
-  //         serviceName: string,
-  //         status?: number
-  //    */
-
-  //    new Worker(1, 'Bob', 'Guru', 1, 'Snow Removal', 1 ),
-  //    new Worker(2, 'Shirley', 'May', 1, 'Accounting', 1 ),
-  //    new Worker(3, 'Luther', 'Vin', 1, 'Project Mgmt.', 1 ),
-  //    new Worker(4, 'Jay', 'Anderson', 1, 'Lawn Care', 1 )
-
-  // ];
+  
   private url: string;
   private workers: Worker[];
 
@@ -44,9 +18,7 @@ export class WorkerService {
 
   constructor(
     private http: HttpClient
-  ) {
-    //this.selectedWorker: Worker = {-1, '', '', -1, '', -1 }; // I don't know, default value, I don't think it is supposed to work like this.
-  }
+  ) { }
 
   getAllWorkers(): Observable<Worker[]> {
     //return this.workers;
