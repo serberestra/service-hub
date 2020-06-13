@@ -1,15 +1,17 @@
 <div align="center">
     <h3>Reservation History</h3>
-    <table>
+    <table class="table">
         <tr>
         <th>Reservation ID</th>
-        <th>Service</th>
         <th>Worker</th>
         <th>Date</th>
         <th>Booked By</th>
         </tr>
-        <tr *ngFor>
-            <td></td>
+        <tr  *ngFor = "let ResView of res">
+            <td>{{ResView.reservationId}}</td>
+            <td>{{ResView.workerId}}</td>
+            <td>{{ResView.reservationDate}}</td>
+            <td>{{ResView.userId}}</td>
         </tr>
     </table>
 </div>

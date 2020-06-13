@@ -8,7 +8,7 @@ import { RegisterWorkerComponent } from './components/register-worker/register-w
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { WorkerListComponent } from './components/company-page/worker-list/worker-list.component';
 import { UpdateFormComponent } from './components/company-page/update-form/update-form.component';
-
+import { ServiceHistoryComponent } from "./components/company-page/service-history/service-history.component";
 // My routes
 import { companyRoutes } from './company.routes';
 
@@ -19,6 +19,7 @@ import { companyRoutes } from './company.routes';
     CompanyPageComponent,
     WorkerListComponent,
     UpdateFormComponent,
+    ServiceHistoryComponent
   ],
   imports: [
     CommonModule,

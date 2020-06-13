@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Worker } from "../models/worker.model";
 import { Subject, Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,8 @@ export class WorkerService {
     return this.selectedWorker;
   }
 
-  getCompanyWorkers(): Observable<Worker[]> {
-    return this.http.get<Worker[]>('http://localhost:9191/api/workers/company/5001');
+  getCompanyWorkers(id : number): Observable<Worker[]> {
+    return this.http.get<Worker[]>(`${environment.localUrl}api/workers/company/` + id);
   }
 
   delete(id: number): Observable<any> {

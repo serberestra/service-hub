@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
 import { Observable } from "rxjs";
+import { environment } from '../../environments/environment';
+import { ResView } from "../models/resView.model";
+import { Company } from "../models/company.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +35,11 @@ export class ReservationService {
 
   }
 
-  companyGet() : Observable<Reservation[]>{
-    return this.http.get<Reservation[]>('http://localhost:9191/api/reservations-view/company/5001')
+  companyIdGet(id : number) : Observable<Company>{
+    return this.http.get<Company>(`${environment.localUrl}api/company/user/` + id)
+  }
+
+  getByCompany(id : number) : Observable<ResView[]>{
+    return this.http.get<ResView[]>(`${environment.localUrl}api/reservations-view/company/` + id)
   }  
 }
