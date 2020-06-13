@@ -17,6 +17,8 @@ import { User } from 'src/app/models/user.model';
 })
 export class ReservationAddComponent implements OnInit {
 
+  myString: string = "";
+
   private workerSubscription: Subscription;
   worker: Worker = {
     id: -1,
@@ -29,7 +31,7 @@ export class ReservationAddComponent implements OnInit {
 
   reservation: Reservation = {
     id: 4,
-    bookBy: -9,      // is user id
+    bookedBy: "",      // is user id
     workerId: -9,
     date: new Date(),         //  date: new Date(),  "2020/06/18"
     status: true
@@ -132,7 +134,10 @@ export class ReservationAddComponent implements OnInit {
 
 
     console.log("SHOULD NOT be NULL: --->" + this.user.id);
-    this.reservation.bookBy = +this.user.id;// parse a String to a Number  // needs to become User.id ..................
+    this.myString = this.user.id;
+    console.log("this is my NEEDED string: " + this.myString);
+    
+    this.reservation.bookedBy = this.myString;// parse a String to a Number  // needs to become User.id ................
 
     // I WAS USING THIS BUT I DONT THINK IT WAS WORKING
     //this.reservation.bookBy = 11;

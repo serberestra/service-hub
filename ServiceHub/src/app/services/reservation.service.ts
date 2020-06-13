@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Reservation } from '../models/reservation.model';
 import { Observable } from 'rxjs';
+import { ReservationCatcher } from '../models/reservationCatcher.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class ReservationService {
     }
    */
   register(reservation: Reservation) {
-    console.log("for ReservationService: bookBy: " + reservation.bookBy);
+    console.log("for ReservationService: bookBy: " + reservation.bookedBy);
     return this.http.post<Reservation>('http://localhost:9191/api/reservation', reservation);
 
   }
@@ -35,9 +36,9 @@ export class ReservationService {
   /**
    * //  http://localhost:9191/api/reservations-view/user/
    */
-  listOfReservationsByUserId(id: number): Observable<Reservation[]> {
+  listOfReservationsByUserId(id: string): Observable<ReservationCatcher[]> {
 
-    return this.http.get<Reservation[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
+    return this.http.get<ReservationCatcher[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
 
   }
 

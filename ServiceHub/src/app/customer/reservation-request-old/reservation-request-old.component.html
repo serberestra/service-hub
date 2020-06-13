@@ -48,6 +48,21 @@
           </section>
     </div>
     <div class="col-5">
-        <p>this is where the list goes</p>
+        <h6>Existing & Past Services</h6>
+
+        <div class="mb-4"
+            *ngFor="let res of reservationArr">
+            <div class="card mb-1">
+              <div class="card-header">service: {{ res.service }}</div>
+              <div class="card-body">
+                <p>worker: {{ res.firstName }} {{ res.lastName }}</p>
+                <p>Company: {{ res.companyName }}</p>
+                <p>phone: {{ res.contact }} {{ res.lastName }}</p>
+                <p>date of service: {{ res.reservationDate }}</p>
+              </div>
+              <div class="card-footer">status: <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Select</button></div>
+            </div>
+          
+          </div>
     </div>
 </div>
