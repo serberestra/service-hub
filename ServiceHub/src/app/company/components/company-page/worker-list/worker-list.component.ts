@@ -22,7 +22,22 @@ export class WorkerListComponent implements OnInit {
   // uid: number;
   renderHtml: boolean = false;
 
-  constructor(private service: WorkerService, private as: AuthService) { }
+  constructor(private service: WorkerService, private as: AuthService) {
+    this.as.loggedCompany.subscribe(result => {
+      if (result) {
+        this.renderHtml = true;
+        this.service.getCompanyWorkers(result.id)
+          .subscribe(data => {
+            // this.workers = data;
+            // this.wFilter = data;
+            this.dataSource = new MatTableDataSource(data);
+          }).add(() => {
+            this.dataSource.sort = this.sort;
+            console.log(this.dataSource.sort);
+          });
+      }
+    });
+  }
 
   // uWorker: Worker;
   sight: boolean = false;
@@ -38,18 +53,20 @@ export class WorkerListComponent implements OnInit {
 
   ngOnInit(): void {
     // this.updateList();
-    this.as.loggedCompany.subscribe(result => {
-      if (result) {
-        this.renderHtml = true;
-        this.service.getCompanyWorkers(result.id)
-          .subscribe(data => {
-            // this.workers = data;
-            // this.wFilter = data;
-            this.dataSource = new MatTableDataSource(data);
-          });
-      }
-    });
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort = this.sort;
+    // this.as.loggedCompany.subscribe(result => {
+    //   if (result) {
+    //     this.renderHtml = true;
+    //     this.service.getCompanyWorkers(result.id)
+    //       .subscribe(data => {
+    //         // this.workers = data;
+    //         // this.wFilter = data;
+    //         this.dataSource = new MatTableDataSource(data);
+    //         this.dataSource.sort = this.sort;
+    //       });
+    //   }
+    // });
+
   }
 
   Delete(id: number): void {

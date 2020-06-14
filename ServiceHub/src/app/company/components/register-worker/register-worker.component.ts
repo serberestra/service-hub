@@ -47,9 +47,8 @@ export class RegisterWorkerComponent implements OnInit {
     this.worker.companyId = this.companyId;
     this.wService.createWroker(this.worker)
       .subscribe(worker => {
-        console.log(worker);
-        this._snackBar.open('Wroker / Service created succesfully', '');
-        // this.router.navigate(['/']);
+        this._snackBar.open('Worker / Service created succesfully', '');
+        this.router.navigate(['/main']);
       })
   }
 
