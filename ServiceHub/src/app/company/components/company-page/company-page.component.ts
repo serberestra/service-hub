@@ -11,7 +11,7 @@ export class CompanyPageComponent implements OnInit {
   constructor(private as: AuthService) { }
 
   ngOnInit(): void {
-    this.as.loggedUser.subscribe(data=> this.name = data.name);
+    this.as.loggedCompany.subscribe(data=> this.name = data.name);
   }
 
 }
