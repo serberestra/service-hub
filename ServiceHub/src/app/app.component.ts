@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +7,7 @@ import { Router, NavigationStart } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ServiceHub';
 
-  constructor(private router: Router) {
-    // router.events.subscribe((event) => {
-    //   if (event instanceof NavigationStart) {
-    //     sessionStorage.clear();
-    //   }
-    // });
-  }
+  constructor() { }
 
 }

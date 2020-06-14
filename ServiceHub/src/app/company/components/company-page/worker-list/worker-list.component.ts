@@ -11,18 +11,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WorkerListComponent implements OnInit {
 
   workers: Worker[];
-  wFilter : Worker[];
-  uid : number;
-  cid : number;
+  wFilter: Worker[];
+  uid: number;
+  cid: number;
 
-  constructor(private service: WorkerService, private as : AuthService) { 
-    this.as.loggedCompany.subscribe(result => this.cid = result.id);
-    console.log(this.cid);
-    this.service.getCompanyWorkers(this.cid)
-      .subscribe(data => { this.workers = data;
-      this.wFilter = data }
-      );
-      this.wFilter = this.workers;
+  constructor(private service: WorkerService, private as: AuthService) {
+    // this.as.loggedCompany.subscribe(result => this.cid = result.id);
+    // console.log(this.cid);
+    // this.service.getCompanyWorkers(this.cid)
+    //   .subscribe(data => { this.workers = data;
+    //   this.wFilter = data }
+    //   );
+    //   this.wFilter = this.workers;
+    this.updateList();
   }
 
   uWorker: Worker;
@@ -32,13 +33,12 @@ export class WorkerListComponent implements OnInit {
   get inputField() {
     return this.actualInputfield;
   }
-  set inputField(temp: string){
+  set inputField(temp: string) {
     this.actualInputfield = temp;
     this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
   }
-  ngOnInit(): void {
 
-  }
+  ngOnInit(): void { }
 
   Delete(id: number): void {
     this.service.delete(id)
@@ -55,8 +55,17 @@ export class WorkerListComponent implements OnInit {
 
     return this.workers.filter(
       (fwork: Worker) =>
-      fwork.serviceName.toLocaleLowerCase().indexOf(filterValue)!== -1
+        fwork.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
     );
+  }
+
+  updateList() {
+    this.as.loggedCompany.subscribe(result => this.cid = result.id);
+    this.service.getCompanyWorkers(this.cid)
+      .subscribe(data => {
+        this.workers = data;
+        this.wFilter = data
+      });
   }
 
 }

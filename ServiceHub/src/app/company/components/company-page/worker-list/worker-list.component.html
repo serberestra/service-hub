@@ -1,5 +1,4 @@
-
-<input type = 'text' [(ngModel)] = 'inputField' value="" placeholder = 'filter'/>
+<input type='text' [(ngModel)]='inputField' value="" placeholder='filter' />
 <!-- <select [(ngModel)] = 'inputField' ngOptions="x for serviceName in wFilter" /> -->
 <div align="center">
     <h3>Your Workers</h3>
@@ -23,5 +22,5 @@
     </table>
 </div>
 <div ng-show="sight">
-    <app-update-form></app-update-form>
+    <app-update-form (updateList)="updateList()"></app-update-form>
 </div>
