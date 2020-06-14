@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from "../../../services/auth.service";
 @Component({
   selector: 'app-company-page',
@@ -8,10 +8,15 @@ import { AuthService } from "../../../services/auth.service";
 export class CompanyPageComponent implements OnInit {
 
   name: string = "";
-  constructor(private as: AuthService) { }
+  constructor(private as: AuthService) {
+    this.as.loggedUser.subscribe(data => this.name = data.name).unsubscribe();
+  }
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.as.loggedCompany.subscribe(data=> this.name = data.name);
+=======
+>>>>>>> e78cd1e25844ec4d352f2bdb8d60ca56d0d8cb7c
   }
 
 }

@@ -105,11 +105,16 @@ export class ReservationRequestOldComponent implements OnInit {
           this.reservationArr = resList;
 
           console.log("this is: resList.length: " + resList.length);
-        //   for (let index = 0; index < resList.length; index++) {
 
-        //     this.reservationArr.push(resList[index]);
-            
-        //   }
+          /**
+           * While this formats the date nicely in a readable format, it breaks the update and has to be changed back to a TimeStamp ??
+           */
+          // for (let index = 0; index < this.reservationArr.length; index++) {
+
+          //   //this.reservationArr.push(this.reservationArr[index]);
+          //    this.reservationArr[index].reservationDate = formatDate(this.reservation.date, 'MM-dd-yyyy', 'en-US').toString();
+          //   // this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
+          // }
           
          });
         console.log("this is the length of this.reservationArr: " + this.reservationArr.length);
