@@ -87,7 +87,7 @@ export class ReservationRequestOldComponent implements OnInit {
     private rs: ReservationService
   ) {
 
-    this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
+    //this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
    }
 
   ngOnInit(): void {
@@ -165,7 +165,25 @@ export class ReservationRequestOldComponent implements OnInit {
     
 
         // I should be waiting for a response ideally ..............................................................
-        this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => console.log(res));
+        this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => {
+          console.log(res);
+          console.log("is it html: " + res.reservationDate);
+          this.updateList();
+        });
+
+  }
+
+  updateList(){
+
+    this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
+      console.log("resList[0].companyName: " + resList[0].companyName);
+      
+      this.reservationArr = resList;
+
+      console.log("this is: resList.length: " + resList.length);
+
+      
+     });
 
   }
 

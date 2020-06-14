@@ -8,6 +8,7 @@ import { ReservationService } from "../../services/reservation.service";
 import { DatePipe } from '@angular/common';
 import { AuthService } from "../../services/auth.service";
 import { User } from 'src/app/models/user.model';
+import { NgForm } from '@angular/forms';
 
 declare var $: any;
 @Component({
@@ -82,7 +83,11 @@ export class ReservationAddComponent implements OnInit {
     //this.userSubscription.unsubscribe();
   }
 
-  onSubmit() {
+  onSubmit(form : NgForm) {
+
+    if (form.value.invalid) {
+      return;
+    }
 
     this.reservation.id = 99; // id does not matter since it will be generated
 
@@ -107,7 +112,10 @@ export class ReservationAddComponent implements OnInit {
 
     //this.reservation.date = formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
     //console.log("Reformatted date property is:  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
-    this.rs.register(this.reservation).toPromise().then(res => console.log(res)).catch(err => console.log(err));
+    this.rs.register(this.reservation).toPromise().then(res => {
+      console.log(res);
+      form.resetForm();
+    }).catch(err => console.log(err));
   }
 
 }

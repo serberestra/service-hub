@@ -64,7 +64,7 @@ export class ReservationService {
   }
 
   getReservationCatcher() {
-    return this.selectedReservationCatcher;
+    return this.selectedReservationCatcher.asObservable();
   }
 
   /**
