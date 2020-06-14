@@ -26,7 +26,7 @@ export class ReservationEditComponent implements OnInit {
   reservationArr: Reservation[];
   reservation: Reservation = {
     id: 4,
-    bookBy: -9,      // is user id
+    bookedBy: '',      // is user id
     workerId: -9,
     date: new Date(),         //  date: new Date(),  "2020/06/18"
     status: true
@@ -42,7 +42,7 @@ export class ReservationEditComponent implements OnInit {
     phoneNumber: ""
   };
 
-  constructor() { 
+  constructor() {
 
     this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
 

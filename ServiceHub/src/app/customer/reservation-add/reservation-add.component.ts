@@ -69,22 +69,12 @@ export class ReservationAddComponent implements OnInit {
   ngOnInit(): void {
 
     this.as.loggedUser.subscribe(result => {
-      console.log('im in reservation add user', result);
       this.user = result;
     })
     //this.worker = this.ws.getWorker();
     this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker) => {
-      // this.worker = { id: worker.id, firstName: worker.firstName, lastName: worker.lastName, companyId: worker.companyId, serviceName: worker.serviceName };
       this.worker = worker;
     });
-    console.log("ngOnInit: ReservationAddComponent's worker.firstName: " + this.worker.firstName);
-
-    this.userSubscription = this.as.getLogged_in_user().subscribe((user: User) => {
-      this.user = { id: user.id, username: user.username, password: user.password, userType: user.userType, phoneNumber: user.phoneNumber };
-    });
-    console.log("ReservationAddComponent Has: " + this.user.id);
-    console.log("ReservationAddComponent Has: " + this.user.username);
-
   }
 
   ngOnDestroy() {
@@ -93,46 +83,8 @@ export class ReservationAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("these are the worker fields:");
-    console.log(this.reservation.date);
-    console.log(this.worker.id);
-    console.log(this.worker.firstName);
-    console.log(this.worker.lastName);
-    console.log(this.worker.serviceName);
-    console.log(this.worker.companyId);
-
-    // "id": 2,                  needs this but that should not be...
-    // "bookedBy": "1010",       soon to get User id...
-    // "workerId": 3,            yes
-    // "date": "10/10/2020",     ...
-    // "status": true               boolean/1 to change to string...
-
-
-
-
-
-
-
-    /**
-     * FOR OBSERVABLE..remember to delete the
-     */
-    // this.as.getLogged_in_user().subscribe((user: User) => {
-    //   console.log("this is user: " + user);
-
-    // });
-
-
-    // this.userSubscription = this.as.getLogged_in_user().subscribe((user: User) => {
-    //   this.user = {id:user.id, username:user.username, password:user.password, userType:user.userType, phoneNumber:user.phoneNumber};
-    // });
-    // console.log("ReservationAddComponent Has: " + this.user.id);
-    // console.log("ReservationAddComponent Has: " + this.user.username);
-
-
-
 
     this.reservation.id = 99; // id does not matter since it will be generated
-
 
     console.log("SHOULD NOT be NULL: --->" + this.user.id);
     this.myString = this.user.id;

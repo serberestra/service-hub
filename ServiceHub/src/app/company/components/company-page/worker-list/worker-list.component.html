@@ -1,27 +1,55 @@
+<div *ngIf="renderHtml">
 
-<input type = 'text' [(ngModel)] = 'inputField' value="" placeholder = 'filter'/>
-<!-- <select [(ngModel)] = 'inputField' ngOptions="x for serviceName in wFilter" /> -->
-<div align="center">
-    <h3>Your Workers</h3>
-    <table class="table">
-        <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>Service</th>
-            <th>Available?</th>
-        </tr>
-        <tr *ngFor="let worker of wFilter">
-            <td>{{worker.id}}</td>
-            <td>{{worker.firstName}} {{worker.lastName}}</td>
-            <td>{{worker.serviceName}}</td>
-            <td>{{worker.available}}</td>
-            <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Update(worker)">
-                    Update</button></td>
-            <td><button class="btn btn-sm btn-outline-primary ml-4" (click)="Delete(worker.id)">
-                    Remove</button></td>
-        </tr>
-    </table>
-</div>
-<div ng-show="sight">
-    <app-update-form></app-update-form>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Filter</mat-label>
+        <input type="text" matInput placeholder="Ex. Application..." (keyup)="applyFilter($event)" name="filterName">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="full-width">
+            <caption class="ml-3 mr-3">List of Workers</caption>
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="id"> ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="name"> Worker's Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="service">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="service"> Service </th>
+                <td mat-cell *matCellDef="let row"> {{row.serviceName}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="available">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="available"> Available </th>
+                <td mat-cell *matCellDef="let row"> {{row.available}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef id="actions"> Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-raised-button class="btn-sm btn-outline-info" (click)="Update(row)">Update</button>
+                    <button mat-raised-button class="btn-sm btn-outline-danger" (click)="Delete(row.id)">Remove</button>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+
+        </table>
+
+    </div>
+
+    <ng-container *ngIf="true">
+        <app-update-form (updateList)="updateList()"></app-update-form>
+    </ng-container>
+
 </div>

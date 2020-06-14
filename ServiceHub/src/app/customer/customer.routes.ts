@@ -3,6 +3,7 @@ import { ReservationAddComponent } from './reservation-add/reservation-add.compo
 import { AuthGuard } from '../services/auth.guard';
 import { ReservationRequestOldComponent } from './reservation-request-old/reservation-request-old.component';
 import { LayoutComponent } from "./layout/layout.component";
+import { RoleGuard } from '../services/role.guard';
 
 
 export const customerRoutes: Routes = [
@@ -13,6 +14,15 @@ export const customerRoutes: Routes = [
         children: [
             {
                 path: '',
+                data: { role: 'user' },
+                canActivate: [RoleGuard],
+                redirectTo: 'reservationAdd',
+                pathMatch: 'full',
+            },
+            {
+                path: '',
+                data: { role: 'user' },
+                canActivate: [RoleGuard],
                 children: [
                     { path: "reservationAdd", component: ReservationAddComponent },
                     { path: "reservationOld", component: ReservationRequestOldComponent },
