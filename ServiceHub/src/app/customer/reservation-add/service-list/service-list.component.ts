@@ -25,6 +25,21 @@ export class SerivicelistComponent implements OnInit {
 
 
 
+  actualInputField_forName = '';
+
+  get inputField_forName() {
+    return this.actualInputField_forName;
+  }
+  set inputField_forName(temp: string) {
+    this.actualInputField_forName = temp;
+
+    this.filteredWorkers = this.actualInputField_forName ?
+      this.performFilter_forName(this.inputField_forName) : this.workers;
+    //        if-true                            if-false
+  }
+
+
+
 
   workers: Worker[];
   filteredWorkers: Worker[];
@@ -54,6 +69,16 @@ export class SerivicelistComponent implements OnInit {
     return this.workers.filter(
       (worker: Worker) =>
         worker.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
+    );
+  }
+
+
+  performFilter_forName(filterValue: string): Worker[] {
+    filterValue = filterValue.toLocaleLowerCase();
+
+    return this.workers.filter(
+      (worker: Worker) =>
+        worker.firstName.toLocaleLowerCase().indexOf(filterValue) !== -1
     );
   }
 
