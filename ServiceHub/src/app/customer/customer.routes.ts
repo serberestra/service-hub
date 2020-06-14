@@ -16,6 +16,13 @@ export const customerRoutes: Routes = [
                 path: '',
                 data: { role: 'user' },
                 canActivate: [RoleGuard],
+                redirectTo: 'reservationAdd',
+                pathMatch: 'full',
+            },
+            {
+                path: '',
+                data: { role: 'user' },
+                canActivate: [RoleGuard],
                 children: [
                     { path: "reservationAdd", component: ReservationAddComponent },
                     { path: "reservationOld", component: ReservationRequestOldComponent },

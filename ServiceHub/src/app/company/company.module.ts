@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
-import { PlatformModule } from '@angular/cdk/platform';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { PlatformModule } from '@angular/cdk/platform';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    PlatformModule
+    MatTableModule
   ]
 })
 export class CompanyModule { }

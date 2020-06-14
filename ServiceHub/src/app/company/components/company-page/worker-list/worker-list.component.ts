@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Worker } from "../../../../models/worker.model";
 import { WorkerService } from '../../../../services/worker.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-worker-list',
@@ -10,35 +12,45 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class WorkerListComponent implements OnInit {
 
-  workers: Worker[];
-  wFilter: Worker[];
-  uid: number;
-  cid: number;
+  displayedColumns: string[] = ['id', 'name', 'service', 'available', 'actions'];
+  dataSource: MatTableDataSource<Worker>;
 
-  constructor(private service: WorkerService, private as: AuthService) {
-    // this.as.loggedCompany.subscribe(result => this.cid = result.id);
-    // console.log(this.cid);
-    // this.service.getCompanyWorkers(this.cid)
-    //   .subscribe(data => { this.workers = data;
-    //   this.wFilter = data }
-    //   );
-    //   this.wFilter = this.workers;
-    this.updateList();
-  }
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  uWorker: Worker;
+  // workers: Worker[];
+  // wFilter: Worker[];
+  // uid: number;
+  renderHtml: boolean = false;
+
+  constructor(private service: WorkerService, private as: AuthService) { }
+
+  // uWorker: Worker;
   sight: boolean = false;
-  actualInputfield = '';
+  // actualInputfield = '';
 
-  get inputField() {
-    return this.actualInputfield;
-  }
-  set inputField(temp: string) {
-    this.actualInputfield = temp;
-    this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
-  }
+  // get inputField() {
+  //   return this.actualInputfield;
+  // }
+  // set inputField(temp: string) {
+  //   this.actualInputfield = temp;
+  //   this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
+  // }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this.updateList();
+    this.as.loggedCompany.subscribe(result => {
+      if (result) {
+        this.renderHtml = true;
+        this.service.getCompanyWorkers(result.id)
+          .subscribe(data => {
+            // this.workers = data;
+            // this.wFilter = data;
+            this.dataSource = new MatTableDataSource(data);
+          });
+      }
+    });
+    this.dataSource.sort = this.sort;
+  }
 
   Delete(id: number): void {
     this.service.delete(id)
@@ -50,22 +62,32 @@ export class WorkerListComponent implements OnInit {
     this.service.setWorker(upWorker);
   }
 
-  performFilter(filterValue: string): Worker[] {
-    filterValue = filterValue.toLocaleLowerCase();
+  // performFilter(filterValue: string): Worker[] {
+  //   filterValue = filterValue.toLocaleLowerCase();
 
-    return this.workers.filter(
-      (fwork: Worker) =>
-        fwork.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
-    );
+  //   return this.workers.filter(
+  //     (fwork: Worker) =>
+  //       fwork.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
+  //   );
+  // }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   updateList() {
-    this.as.loggedCompany.subscribe(result => this.cid = result.id);
-    this.service.getCompanyWorkers(this.cid)
-      .subscribe(data => {
-        this.workers = data;
-        this.wFilter = data
-      });
+    this.as.loggedCompany.subscribe(result => {
+      if (result) {
+        this.renderHtml = true;
+        this.service.getCompanyWorkers(result.id)
+          .subscribe(data => {
+            // this.workers = data;
+            // this.wFilter = data;
+            this.dataSource = new MatTableDataSource(data);
+          });
+      }
+    });
   }
 
 }

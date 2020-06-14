@@ -15,6 +15,13 @@ export const companyRoutes: Routes = [
                 path: '',
                 data: { role: 'company' },
                 canActivate: [RoleGuard],
+                redirectTo: 'main',
+                pathMatch: 'full',
+            },
+            {
+                path: '',
+                data: { role: 'company' },
+                canActivate: [RoleGuard],
                 children: [
                     { path: "main", component: CompanyPageComponent },
                     { path: "registerWorker", component: RegisterWorkerComponent },
