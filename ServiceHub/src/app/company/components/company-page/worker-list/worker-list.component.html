@@ -37,7 +37,7 @@
                 <th mat-header-cell *matHeaderCellDef id="actions"> Actions </th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-raised-button class="btn-sm btn-outline-info" (click)="Update(row)">Update</button>
-                    <button mat-raised-button class="btn-sm btn-outline-danger" (click)="Delete(row.id)">Remove</button>
+                    <button mat-raised-button class="btn-sm btn-outline-danger" (click)="Delete(row)">Remove</button>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

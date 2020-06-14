@@ -3,6 +3,8 @@ import { ReservationService } from "../../../../services/reservation.service";
 import { ResView } from "../../../../models/resView.model";
 import { AuthService } from "../../../../services/auth.service";
 import { formatDate } from '@angular/common';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-service-history',
@@ -17,42 +19,29 @@ export class ServiceHistoryComponent implements OnInit {
   fres : ResView[]; 
   constructor(private rs:ReservationService,
               private as: AuthService ) { }
+  
+displayedColumns: string[] = ['ID', 'Date', 'Service', 'BookedBy', 'WorkerID' ];
+dataSource: MatTableDataSource<ResView>;            
 
   ngOnInit(): void {
     this.as.loggedCompany.subscribe(result => this.cid = result.id);
     console.log(this.cid);
     this.rs.getByCompany(this.cid).subscribe(data =>
       {
-      for(var rv in data){
+      for(var rv = 0; rv < data.length; rv++){
       if(data[rv]['status']===true)
       {
-        // console.log(data[rv]['reservationDate']);
-        // data[rv]['reservationDate']= new Date(formatDate(data[rv]['reservationDate'], 'yyyy-MM-dd', 'en-US'));
-        // console.log(data[rv]['reservationDate']);
+        data[rv]['reservationDate']= new Date(formatDate(data[rv]['reservationDate'], 'yyyy-MM-dd', 'en-US'));
         this.res.push(data[rv]);
       }
     }
+    this.dataSource = new MatTableDataSource(this.res);
   });
   }
-  actualInputfield : Date;
 
-  get inputField() {
-    return this.actualInputfield;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  set inputField(temp: Date){
-    console.log(temp);
-    this.actualInputfield = temp;
-    this.fres = this.actualInputfield ? this.performFilter(this.inputField) : this.res;
-  }
-    
-    
-    performFilter(filterValue: Date): ResView[] {
-
-      return this.res.filter(
-
-        (fresno: ResView) =>{
-          console.log(fresno.reservationDate.setTime);
-        fresno.reservationDate.setTime === filterValue.setTime;})
-    
-}
+  
 }

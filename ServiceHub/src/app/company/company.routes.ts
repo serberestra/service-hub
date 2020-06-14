@@ -3,11 +3,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { RegisterWorkerComponent } from './components/register-worker/register-worker.component';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { AuthGuard } from '../services/auth.guard';
-<<<<<<< HEAD
 import { ServiceHistoryComponent } from './components/company-page/service-history/service-history.component';
-=======
 import { RoleGuard } from '../services/role.guard';
->>>>>>> e78cd1e25844ec4d352f2bdb8d60ca56d0d8cb7c
 
 export const companyRoutes: Routes = [
     {

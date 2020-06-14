@@ -4,6 +4,7 @@ import { WorkerService } from '../../../../services/worker.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-worker-list',
@@ -16,7 +17,6 @@ export class WorkerListComponent implements OnInit {
   dataSource: MatTableDataSource<Worker>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   // workers: Worker[];
   // wFilter: Worker[];
   // uid: number;
@@ -52,9 +52,10 @@ export class WorkerListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  Delete(id: number): void {
-    this.service.delete(id)
+  Delete(dWorker : Worker): void {
+    this.service.delete(dWorker.id)
       .subscribe(data => console.log(data));
+      this.updateList();
   }
 
   Update(upWorker: Worker): void {

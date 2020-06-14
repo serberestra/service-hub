@@ -69,7 +69,7 @@ export class UpdateFormComponent implements OnInit {
     this.ws.update(this.worker).subscribe(data => {
       if (data) {
         // this.initForm();
-        this.resetForm();
+        // this.resetForm();
         this.updateList.emit(true);
       }
     });
