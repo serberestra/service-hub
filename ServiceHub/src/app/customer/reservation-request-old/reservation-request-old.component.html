@@ -63,7 +63,7 @@
                 <p>worker: {{ res.firstName }} {{ res.lastName }}</p>
                 <p>Company: {{ res.companyName }}</p>
                 <p>phone: {{ res.contact }} {{ res.lastName }}</p>
-                <p>date of service: {{ res.reservationDate | date: 'MM/dd/yyy' }}</p>
+                <p>date of service: {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
               </div>
               <div class="card-footer">: <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button></div>
             </div>
