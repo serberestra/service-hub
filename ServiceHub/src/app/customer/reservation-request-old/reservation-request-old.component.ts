@@ -87,7 +87,7 @@ export class ReservationRequestOldComponent implements OnInit {
     private rs: ReservationService
   ) {
 
-    this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
+    //this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
    }
 
   ngOnInit(): void {
