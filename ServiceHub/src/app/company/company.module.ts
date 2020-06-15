@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 
-
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -48,7 +47,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+
   ]
 })
 export class CompanyModule { }

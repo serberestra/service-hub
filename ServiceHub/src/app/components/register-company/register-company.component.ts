@@ -15,6 +15,7 @@ import { Company } from '../../models/company.model';
 export class RegisterCompanyComponent implements OnInit {
 
   matcher = new FormErrorMatcher();
+  matchPass: boolean = false;
 
   registerCompany = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -42,23 +43,27 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onSubmit() {
-    let user: User = this.registerCompany.value;
-    user.userType = 'company';
-    this.registerService.createCustomer(user)
-      .subscribe(rUser => {
-        if (rUser) {
-          let company: Company = this.registerCompany.value;
-          company.userId = parseInt(rUser['id']);
-          this.registerService.createCompany(company)
-            .subscribe(rCompany => {
-              if (rCompany) {
-                this.registerCompany.reset({});
-                this._snackBar.open('Company created successfully', '');
-                this.router.navigate(['/login']);
-              }
-            })
-        }
-      })
+    if (this.password.value === this.rePassword.value) {
+      let user: User = this.registerCompany.value;
+      user.userType = 'company';
+      this.registerService.createCustomer(user)
+        .subscribe(rUser => {
+          if (rUser) {
+            let company: Company = this.registerCompany.value;
+            company.userId = parseInt(rUser['id']);
+            this.registerService.createCompany(company)
+              .subscribe(rCompany => {
+                if (rCompany) {
+                  this.registerCompany.reset({});
+                  this._snackBar.open('Company created successfully', '');
+                  this.router.navigate(['/login']);
+                }
+              })
+          }
+        })
+    } else {
+      this.matchPass = true;
+    }
   }
 
 }

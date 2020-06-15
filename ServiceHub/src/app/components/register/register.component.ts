@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   matcher = new FormErrorMatcher();
+  matchPass: boolean = false;
 
   registerUser = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern(/([a-zA-Z]{1}[\w]+)@([\w]+\.)([\w])+/)]),
@@ -36,14 +37,21 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    let user: User = this.registerUser.value;
-    user.userType = 'user';
-    this.registerService.createCustomer(user)
-      .subscribe(result => {
-        this.registerUser.reset({});
-        this._snackBar.open('User created successfully', '');
-        this.router.navigate(['/login']);
-      })
+    console.log('in register', this.password.value === this.rePassword.value)
+    if (this.password.value === this.rePassword.value) {
+      let user: User = this.registerUser.value;
+      user.userType = 'user';
+      this.registerService.createCustomer(user)
+        .subscribe(result => {
+          this.registerUser.reset({});
+          this._snackBar.open('User created successfully', '');
+          this.router.navigate(['/login']);
+        })
+    } else {
+      this.matchPass = true;
+      // this._snackBar.open('The re-password do not match with the password', '');
+    }
+
   }
 
 }

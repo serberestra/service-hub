@@ -58,13 +58,7 @@ export class ReservationAddComponent implements OnInit {
     public datePipe: DatePipe,
   ) {
 
-    console.log("Before Formatting date property : !!  " + this.reservation.date);
-    //this.reservation.date = this.datePipe.transform(this.reservation.date, 'yyyy-MM-dd');                    // WORKED WITH STRING
-    // console.log("this is date property : !!  " + formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
-
-    this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
-    console.log("After Formatting: this is date property : !!  " + this.reservation.date);
-    //this.reservation.date = formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US').toString();
+    this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
   }
 
   ngOnInit(): void {
@@ -72,7 +66,6 @@ export class ReservationAddComponent implements OnInit {
     this.as.loggedUser.subscribe(result => {
       this.user = result;
     })
-    //this.worker = this.ws.getWorker();
     this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker) => {
       this.worker = worker;
     });
@@ -80,38 +73,24 @@ export class ReservationAddComponent implements OnInit {
 
   ngOnDestroy() {
     this.workerSubscription.unsubscribe();
-    //this.userSubscription.unsubscribe();
   }
 
-  onSubmit(form : NgForm) {
+  onSubmit(form: NgForm) {
 
     if (form.value.invalid) {
       return;
     }
 
-    this.reservation.id = 99; // id does not matter since it will be generated
+    this.reservation.id = 99;
 
-    console.log("SHOULD NOT be NULL: --->" + this.user.id);
     this.myString = this.user.id;
-    console.log("this is my NEEDED string: " + this.myString);
 
-    this.reservation.bookedBy = this.myString;// parse a String to a Number  // needs to become User.id ................
+    this.reservation.bookedBy = this.myString;
 
-    // I WAS USING THIS BUT I DONT THINK IT WAS WORKING
-    //this.reservation.bookBy = 11;
     this.reservation.workerId = this.worker.id;
-    // I might have to conver formatting of date given: reservation.date set by HTML
-    //this.reservation.date is set
+
     this.reservation.status = true;
 
-    //console.log("here is the date: " + new Date(this.reservation.date));
-    console.log("After DatePicker: this is the date: " + this.reservation.date);
-
-    // this.reservation.date = new Date(formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));    // if your trying to use a date, try this ...
-    //this.reservation.date = new Date(this.reservation.date);    // I THINK THIS JUST SET TODAYS DATE AFTER THE DATE PICKER, THIS WONT WORK ...
-
-    //this.reservation.date = formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
-    //console.log("Reformatted date property is:  " + formatDate(this.reservation.date, 'dd-MM-yyyy', 'en-US'));
     this.rs.register(this.reservation).toPromise().then(res => {
       console.log(res);
       form.resetForm();

@@ -69,10 +69,12 @@ export class WorkerListComponent implements OnInit {
 
   }
 
-  Delete(dWorker : Worker): void {
+  Delete(dWorker: Worker): void {
     this.service.delete(dWorker.id)
-      .subscribe(data => console.log(data));
-      this.updateList();
+      .subscribe(data => {
+        console.log(data);
+        this.updateList();
+      });
   }
 
   Update(upWorker: Worker): void {

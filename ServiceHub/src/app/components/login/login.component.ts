@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email.value, this.password.value)
       .subscribe(result => {
         if (result) {
+          this.authService.setHide(true);
           if (result.userType === 'company') this.router.navigate(['/company']);
           else this.router.navigate(['/customer']);
         } else {

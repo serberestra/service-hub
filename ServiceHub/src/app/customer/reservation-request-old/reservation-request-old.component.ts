@@ -17,18 +17,18 @@ import { Subscription } from 'rxjs';
 })
 export class ReservationRequestOldComponent implements OnInit {
 
-    //private workerSubscription: Subscription;
-    worker: Worker = {
-      id: -1,
-      firstName: "",
-      lastName: "",
-      companyId: -1,
-      serviceName: "",
-  
-    };  //  status: -1
+  //private workerSubscription: Subscription;
+  worker: Worker = {
+    id: -1,
+    firstName: "",
+    lastName: "",
+    companyId: -1,
+    serviceName: "",
 
-    private reservationCatcherSubscription: Subscription;
-     reservationCatcher: ReservationCatcher =
+  };  //  status: -1
+
+  private reservationCatcherSubscription: Subscription;
+  reservationCatcher: ReservationCatcher =
     {
       reservationId: "",
       service: "select card -->",
@@ -43,43 +43,43 @@ export class ReservationRequestOldComponent implements OnInit {
       status: true,
       userId: "",
       userName: ""
-   };
-
-    reservationArr: ReservationCatcher[] = [
-      {
-         reservationId: "",
-         service: "",
-         companyId: "",
-         companyName: "",
-         companyAddress: "",
-         contact: "",
-         workerId: "",
-         firstName: "",
-         lastName: "",
-         reservationDate: "",
-         status: true,
-         userId: "",
-         userName: ""
-      }
-    ];
-
-    reservation: Reservation = {
-      id: 4,
-      bookedBy: "",      // is user id
-      workerId: -9,
-      date: new Date(),         //  date: new Date(),  "2020/06/18"
-      status: true
     };
-  
-    //private userSubscription: Subscription;
-    private user: User = {
-  
-      id: "",
-      username: "",
-      password: "",
-      userType: "",
-      phoneNumber: ""
-    };
+
+  reservationArr: ReservationCatcher[] = [
+    {
+      reservationId: "",
+      service: "",
+      companyId: "",
+      companyName: "",
+      companyAddress: "",
+      contact: "",
+      workerId: "",
+      firstName: "",
+      lastName: "",
+      reservationDate: "",
+      status: true,
+      userId: "",
+      userName: ""
+    }
+  ];
+
+  reservation: Reservation = {
+    id: 4,
+    bookedBy: "",      // is user id
+    workerId: -9,
+    date: new Date(),         //  date: new Date(),  "2020/06/18"
+    status: true
+  };
+
+  //private userSubscription: Subscription;
+  private user: User = {
+
+    id: "",
+    username: "",
+    password: "",
+    userType: "",
+    phoneNumber: ""
+  };
 
   constructor(
 
@@ -88,7 +88,7 @@ export class ReservationRequestOldComponent implements OnInit {
   ) {
 
     //this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
-   }
+  }
 
   ngOnInit(): void {
 
@@ -98,52 +98,52 @@ export class ReservationRequestOldComponent implements OnInit {
     })
     //console.log('im in reservation add user: ', this.user.id + " & " + this.user.username);
 
-        // per userId get all Rerservations per User
-        this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
-          console.log("resList[0].companyName: " + resList[0].companyName);
-          
-          this.reservationArr = resList;
+    // per userId get all Rerservations per User
+    this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
+      console.log("resList[0].companyName: " + resList[0].companyName);
 
-          console.log("this is: resList.length: " + resList.length);
+      this.reservationArr = resList;
 
-          /**
-           * While this formats the date nicely in a readable format, it breaks the update and has to be changed back to a TimeStamp ??
-           */
-          // for (let index = 0; index < this.reservationArr.length; index++) {
+      console.log("this is: resList.length: " + resList.length);
 
-          //   //this.reservationArr.push(this.reservationArr[index]);
-          //    this.reservationArr[index].reservationDate = formatDate(this.reservation.date, 'MM-dd-yyyy', 'en-US').toString();
-          //   // this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
-          // }
-          
-         });
-        console.log("this is the length of this.reservationArr: " + this.reservationArr.length);
-        
-        this.reservationCatcherSubscription = this.rs.getReservationCatcher().subscribe((r: ReservationCatcher)=>{
-          this.reservationCatcher = 
-          {
-            reservationId: r.reservationId,
-            service: r.service,
-            companyId: r.companyId,
-            companyName: r.companyName,
-            companyAddress: r.companyAddress,
-            contact: r.contact,
-            workerId: r.workerId,
-            firstName: r.firstName,
-            lastName: r.lastName,
-            reservationDate: r.reservationDate,
-            status: true,
-            userId: r.userId,
-            userName: r.userName
-         };
-        });
+      /**
+       * While this formats the date nicely in a readable format, it breaks the update and has to be changed back to a TimeStamp ??
+       */
+      // for (let index = 0; index < this.reservationArr.length; index++) {
+
+      //   //this.reservationArr.push(this.reservationArr[index]);
+      //    this.reservationArr[index].reservationDate = formatDate(this.reservation.date, 'MM-dd-yyyy', 'en-US').toString();
+      //   // this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
+      // }
+
+    });
+    console.log("this is the length of this.reservationArr: " + this.reservationArr.length);
+
+    this.reservationCatcherSubscription = this.rs.getReservationCatcher().subscribe((r: ReservationCatcher) => {
+      this.reservationCatcher =
+      {
+        reservationId: r.reservationId,
+        service: r.service,
+        companyId: r.companyId,
+        companyName: r.companyName,
+        companyAddress: r.companyAddress,
+        contact: r.contact,
+        workerId: r.workerId,
+        firstName: r.firstName,
+        lastName: r.lastName,
+        reservationDate: r.reservationDate,
+        status: true,
+        userId: r.userId,
+        userName: r.userName
+      };
+    });
 
   }
 
 
 
 
-  onSelect( reservation: ReservationCatcher ) {
+  onSelect(reservation: ReservationCatcher) {
 
     console.log("onSelect of RROldComp: " + reservation.service);
     console.log("onSelect of RROldComp: " + reservation.firstName);
@@ -153,37 +153,37 @@ export class ReservationRequestOldComponent implements OnInit {
 
   }
 
-    /**
-   * SELECTING FROM LIST ON THE RIGHT IN TEMPLATE
-   * @param reservation: the ReservationCatcher object to update 
-   */
-  onSubmit(  ) {
+  /**
+ * SELECTING FROM LIST ON THE RIGHT IN TEMPLATE
+ * @param reservation: the ReservationCatcher object to update 
+ */
+  onSubmit() {
 
-        // submit the edited reservation to a service
+    // submit the edited reservation to a service
     // in Reservation
     console.log("this is Date: " + this.reservationCatcher.reservationDate);
-    
 
-        // I should be waiting for a response ideally ..............................................................
-        this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => {
-          console.log(res);
-          console.log("is it html: " + res.reservationDate);
-          this.updateList();
-        });
+
+    // I should be waiting for a response ideally ..............................................................
+    this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => {
+      console.log(res);
+      console.log("is it html: " + res.reservationDate);
+      this.updateList();
+    });
 
   }
 
-  updateList(){
+  updateList() {
 
     this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
       console.log("resList[0].companyName: " + resList[0].companyName);
-      
+
       this.reservationArr = resList;
 
       console.log("this is: resList.length: " + resList.length);
 
-      
-     });
+
+    });
 
   }
 

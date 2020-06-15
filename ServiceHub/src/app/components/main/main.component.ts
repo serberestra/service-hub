@@ -12,6 +12,7 @@ import { OpenSnackBarService } from "../../services/open-snack-bar.service";
 export class MainComponent implements OnInit {
 
   servicesList: Worker[];
+  filteredWorkers: Worker[];
 
   constructor(
     private workerService: WorkerService,
@@ -21,6 +22,7 @@ export class MainComponent implements OnInit {
     this.workerService.getAllWorkers().subscribe(
       result => {
         this.servicesList = result;
+        this.filteredWorkers = result;
       }
     )
   }
@@ -36,6 +38,26 @@ export class MainComponent implements OnInit {
     }
   }
 
+  actualInputfield = '';
 
+  get inputField() {
+    return this.actualInputfield;
+  }
+  set inputField(temp: string) {
+    this.actualInputfield = temp;
+
+    this.filteredWorkers = this.actualInputfield ?
+      this.performFilter(this.inputField) : this.servicesList;
+    //        if-true                            if-false
+  }
+
+  performFilter(filterValue: string): Worker[] {
+    filterValue = filterValue.toLocaleLowerCase();
+
+    return this.servicesList.filter(
+      (worker: Worker) =>
+        worker.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
+    );
+  }
 
 }

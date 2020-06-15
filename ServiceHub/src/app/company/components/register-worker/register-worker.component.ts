@@ -48,7 +48,7 @@ export class RegisterWorkerComponent implements OnInit {
     this.wService.createWroker(this.worker)
       .subscribe(worker => {
         this._snackBar.open('Worker / Service created succesfully', '');
-        this.router.navigate(['/main']);
+        this.router.navigate(['company/workers']);
       })
   }
 

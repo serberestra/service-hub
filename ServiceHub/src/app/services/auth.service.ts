@@ -14,11 +14,13 @@ export class AuthService {
 
   private userSource = new BehaviorSubject(null);
   private companySource = new BehaviorSubject(null);
+  private sourceLogout = new BehaviorSubject(false);
 
   redirectUrl: string;
 
   loggedUser = this.userSource.asObservable();
   loggedCompany = this.companySource.asObservable();
+  hideLogout = this.sourceLogout.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -51,6 +53,10 @@ export class AuthService {
       }));
   }
 
+  setHide(hide: boolean) {
+    this.sourceLogout.next(hide);
+  }
+
   clear(): void {
     this.userSource.next(null);
   }
@@ -62,6 +68,7 @@ export class AuthService {
   }
 
   logout(): void {
+    this.setHide(false);
     this.clear();
     this.router.navigate(['/']);
   }
