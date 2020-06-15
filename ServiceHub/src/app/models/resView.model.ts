@@ -1,17 +1,17 @@
 export class ResView{
     constructor(
-        reservationId : number,
-        service : string,
-        companyId : number,
-        companyName : string,
-        companyAddress : string,
-        contact : string,
-        workerId : number,
-        firstName : string,
-        lastName : string,
-        reservationDate : string,
-        status : boolean,
-        userId : number,
-        userName : string
+        public reservationId : number,
+        public service : string,
+        public companyId : number,
+        public companyName : string,
+        public companyAddress : string,
+        public contact : string,
+        public workerId : number,
+        public firstName : string,
+        public lastName : string,
+        public reservationDate : Date,
+        public status : boolean,
+        public userId : number,
+        public userName : string
     ){}
 }
