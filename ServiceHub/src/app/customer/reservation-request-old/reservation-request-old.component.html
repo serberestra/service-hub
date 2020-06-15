@@ -1,68 +1,46 @@
 <h2>Service History</h2>
 <div class="row">
-  <div class="col-7">
+  <div class="col-12 col-md-5">
+    <div class="card mb-3 border-info shadow">
+      <div class="card-body">
+        <form ngNativeValidate (submit)="onSubmit()" #service="ngForm">
+          <h4 id="serviceModalLabel">Reserve Same Service</h4>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Date:</mat-label>
+            <input matInput [matDatepicker]="dp3" name="date" readonly [(ngModel)]="reservationCatcher.reservationDate">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field>
 
-    <section class="mt-5">
-      <!-- container below -->
-      <div class="">
-        <!-- row below -->
-        <div class="">
-          <!-- col-md-10 -->
-          <div class="">
-            <div class="card mr-5">
-              <div class="card-header">
-                <h4>Reserve Same Service</h4>
-              </div>
-              <div class="card-body">
-                <form ngNativeValidate (submit)="onSubmit()">
-                  <!-- [(ngModel)]="reservation.date"  reservationCatcher                  id="start" name="trip-start" -->
-                  <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" name="date" value="2020-06-14" min="2020-01-01" max="2021-12-31"
-                      [(ngModel)]="reservationCatcher.reservationDate">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Service:</mat-label>
+            <input type="text" name="service" matInput readonly [(ngModel)]="reservationCatcher.service">
+          </mat-form-field>
 
-                  </div>
-                  <div class="form-group">
-                    <label for="service">Service:</label>
-                    <!-- [(ngModel)]="worker.serviceName" -->
-                    <input name="service" id="username" required readonly type="text" class="form-control"
-                      [(ngModel)]="reservationCatcher.service">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Worker:</label>
-                    <!-- [(ngModel)]="worker.firstName" firstName-->
-                    <input id="pass" required readonly name="password" type="text" class="form-control"
-                      [(ngModel)]="reservationCatcher.firstName">
-                  </div>
-                  <input type="submit" class="btn btn-primary btn-block" value="Submit">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Worker:</mat-label>
+            <input type="text" name="worker" matInput readonly [(ngModel)]="reservationCatcher.firstName">
+          </mat-form-field>
+
+          <button mat-raised-button class="bg-info btn-block text-uppercase" type="submit"><strong>Submit</strong>
+          </button>
+        </form>
       </div>
-    </section>
-  </div>
-  <div class="col-5">
-    <h6>Existing & Past Services</h6>
-
-    <div class="mb-4" *ngFor="let res of reservationArr">
-      <div class="card mb-1">
-        <div class="card-header">service: {{ res.service }}</div>
-        <div class="card-body">
-          <p>worker: {{ res.firstName }} {{ res.lastName }}</p>
-          <p>Company: {{ res.companyName }}</p>
-          <p>phone: {{ res.contact }} </p>
-          <p>date of service: {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
-        </div>
-        <div class="card-footer">: <button (click)="onSelect( res )"
-            class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button></div>
-      </div>
-
     </div>
   </div>
+
+  <div class="col-12 col-md-7">
+
+    <div class="card shadow mt-3" *ngFor="let res of reservationArr">
+      <div class="card-body">
+        <h3 class="card-title"><strong>{{ res.service }}</strong></h3>
+        <h6 class="card-subtitle mb-2 text-muted">{{ res.companyName }}</h6>
+        <p class="card-text"><strong>Worker:</strong> {{ res.firstName }} {{ res.lastName }}</p>
+        <p class="card-text"><strong>Phone:</strong> {{ res.contact }} {{ res.lastName }}</p>
+        <p class="card-text"><strong>Date of service:</strong> {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
+        <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button>
+      </div>
+    </div>
+
+  </div>
 </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>

@@ -51,15 +51,13 @@ export class ReservationAddComponent implements OnInit {
   constructor(
     private as: AuthService,
     private ws: WorkerService,
-    private rs: ReservationService, ) { }
-
+    private rs: ReservationService ) { }
 
   ngOnInit(): void {
 
     this.as.loggedUser.subscribe(result => {
       this.user = result;
     })
-
     this.workerSubscription = this.ws.getWorker().subscribe((worker: Worker) => {
       this.worker = worker;
     });
@@ -67,28 +65,21 @@ export class ReservationAddComponent implements OnInit {
 
   ngOnDestroy() {
     this.workerSubscription.unsubscribe();
-
   }
 
-  /**
-   * 
-   * @param form the form holds a reservation of a new Service
-   */
-  onSubmit(form : NgForm) {
+  onSubmit(form: NgForm) {
 
     if (form.value.invalid) {
       return;
     }
 
-    this.reservation.id = 99; // id does not matter since it will be generated
+    this.reservation.id = 99;
 
-    this.reservation.bookedBy = this.user.id; // used to be this.myString;
+    this.reservation.bookedBy = this.user.id;
 
     this.reservation.workerId = this.worker.id;
+
     this.reservation.status = true;
-
-    console.log("After DatePicker: this is the date: " + this.reservation.date);
-
 
     this.rs.register(this.reservation).toPromise().then(res => {
       console.log(res);

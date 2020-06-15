@@ -16,7 +16,7 @@ export const companyRoutes: Routes = [
                 path: '',
                 data: { role: 'company' },
                 canActivate: [RoleGuard],
-                redirectTo: 'main',
+                redirectTo: 'workers',
                 pathMatch: 'full',
             },
             {
@@ -24,7 +24,7 @@ export const companyRoutes: Routes = [
                 data: { role: 'company' },
                 canActivate: [RoleGuard],
                 children: [
-                    { path: "main", component: CompanyPageComponent },
+                    { path: "workers", component: CompanyPageComponent },
                     { path: "registerWorker", component: RegisterWorkerComponent },
                     { path: "serviceHistory", component: ServiceHistoryComponent }
                 ]

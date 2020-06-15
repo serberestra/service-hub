@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "useroptions", component: NotFoundComponent },
   { path: "register", component: RegisterComponent },
   { path: "registerCompany", component: RegisterCompanyComponent },
-  { path: "reservationAdd", component: ReservationAddComponent },
+  // { path: "reservationAdd", component: ReservationAddComponent },
 ];
 
 @NgModule({

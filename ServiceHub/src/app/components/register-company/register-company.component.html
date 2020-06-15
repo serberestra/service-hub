@@ -1,85 +1,92 @@
-<div class="row mt-5 d-flex justify-content-center">
-    <div class="col-md-8 mx-auto">
-        <div class="card shadow rounded">
-            <div class="card-body">
-                <form class="form-signin needs-validation" novalidate [formGroup]="registerCompany"
-                    (ngSubmit)="onSubmit()">
-                    <h1 class="h3 mb-3 font-weight-normal text-center"><strong>Company Registration</strong></h1>
-                    <h5 class="mb-3 font-weight-normal text-center">Please enter the following information:</h5>
+<div class="container">
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow rounded">
+                <div class="card-body">
+                    <form class="form-signin needs-validation" novalidate [formGroup]="registerCompany"
+                        (ngSubmit)="onSubmit()">
+                        <h1 class="h3 mb-3 font-weight-normal text-center"><strong>Company Registration</strong></h1>
+                        <h5 class="mb-3 font-weight-normal text-center">Please enter the following information:</h5>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Company's Name</mat-label>
-                        <input type="text" matInput placeholder="" formControlName="name" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="name.hasError('required')">
-                            Email is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Company's Name</mat-label>
+                            <input type="text" matInput placeholder="" formControlName="name"
+                                [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="name.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Company's Phone Number</mat-label>
-                        <input type="tel" matInput placeholder="Enter the company's phone number..."
-                            formControlName="phoneNumber" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
-                            Please enter a valid phone number
-                        </mat-error>
-                        <mat-error *ngIf="phoneNumber.hasError('required')">
-                            Phone Number is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Company's Phone Number</mat-label>
+                            <input type="tel" matInput placeholder="Enter the company's phone number..."
+                                formControlName="phoneNumber" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="phoneNumber.hasError('pattern') && !phoneNumber.hasError('required')">
+                                Please enter a valid phone number
+                            </mat-error>
+                            <mat-error *ngIf="phoneNumber.hasError('required')">
+                                Phone Number is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Company's Address</mat-label>
-                        <input type="tel" matInput placeholder="Enter the company's address..."
-                            formControlName="address" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="address.hasError('required')">
-                            Address is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Company's Address</mat-label>
+                            <input type="tel" matInput placeholder="Enter the company's address..."
+                                formControlName="address" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="address.hasError('required')">
+                                Address is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Company's Email</mat-label>
-                        <input type="email" matInput placeholder="Ex. example@example.com" formControlName="username"
-                            [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="username.hasError('email') && !username.hasError('required')">
-                            Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="username.hasError('required')">
-                            Email is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Company's Email</mat-label>
+                            <input type="email" matInput placeholder="Ex. example@example.com"
+                                formControlName="username" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="username.hasError('email') && !username.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="username.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Password</mat-label>
-                        <input type="password" matInput placeholder="" formControlName="password"
-                            [errorStateMatcher]="matcher">
-                        <mat-hint>Your password must be 6-10 characters long, contain at least 1 uppercase and lowercase
-                            letter,
-                            1 number and 1 special character, and must not contain spaces, or emoji.</mat-hint>
-                        <mat-error *ngIf="password.hasError('email') && !password.hasError('required')">
-                            Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="password.hasError('required')">
-                            Password is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Password</mat-label>
+                            <input type="password" matInput placeholder="" formControlName="password"
+                                [errorStateMatcher]="matcher">
+                            <mat-hint>Your password must be 6-10 characters long, contain at least 1 uppercase and
+                                lowercase
+                                letter,
+                                1 number and 1 special character, and must not contain spaces, or emoji.</mat-hint>
+                            <mat-error *ngIf="password.hasError('email') && !password.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="password.hasError('required')">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>* Re-Password</mat-label>
-                        <input type="password" matInput placeholder="" formControlName="rePassword"
-                            [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="rePassword.hasError('email') && !rePassword.hasError('required')">
-                            Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf="rePassword.hasError('required')">
-                            Re-Password is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="full-width mt-3">
+                            <mat-label>* Re-Password</mat-label>
+                            <input type="password" matInput placeholder="" formControlName="rePassword"
+                                [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="rePassword.hasError('email') && !rePassword.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="rePassword.hasError('required')">
+                                Re-Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <p *ngIf="matchPass" class="text-sm text-danger m-0" style="font-size: 11px;">
+                            Re-Password do not match the <strong>Password</strong>
+                        </p>
 
-                    <button mat-raised-button class="bg-info btn-block text-uppercase" type="submit"
-                        [disabled]="!registerCompany.valid"><strong>Accept</strong>
-                    </button>
-                    <p class="mt-4 mb-0 text-muted text-center">Service Hub © 2020</p>
-                </form>
+                        <button mat-raised-button class="bg-info btn-block text-uppercase mt-3" type="submit"
+                            [disabled]="!registerCompany.valid"><strong>Accept</strong>
+                        </button>
+                        <p class="mt-4 mb-0 text-muted text-center">Service Hub © 2020</p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

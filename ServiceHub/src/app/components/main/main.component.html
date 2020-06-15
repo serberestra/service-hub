@@ -1,6 +1,13 @@
 <div class="container mt-5">
+    <h2 class="text-center">One way to get the Service that you desire!</h2>
+    <h4>What kind of service do you need?</h4>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Filter by Service:</mat-label>
+        <input type="text" matInput placeholder="..." [(ngModel)]='inputField' name="filterService">
+    </mat-form-field>
+
     <div class="row">
-        <div class="col-12 col-md-6" *ngFor="let service of servicesList">
+        <div class="col-12 col-md-6" *ngFor="let service of filteredWorkers">
             <div class="card mb-3 border-info shadow">
                 <div class="row no-gutters">
                     <div class="col-md-4">

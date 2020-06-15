@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-info fixed-top py-4">
   <div class="container">
-    <a href="javascript:void" class="navbar-brand" routerLink="/">
+    <a href="javascript:void" class="navbar-brand">
       <h3 class="d-inline align-middle">ServiceHub</h3>
     </a>
 
@@ -9,13 +9,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link">Login</a>
+          <a routerLink="/login" class="nav-link" *ngIf="!hideBtn">Login</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/register" class="nav-link">Register</a>
+          <a routerLink="/register" class="nav-link" *ngIf="!hideBtn">Register</a>
         </li>
         <li class="nav-item">
-          <a href="javascript:void()" (click)="logout()" class="nav-link">Logout</a>
+          <a href="javascript:void()" (click)="logout()" class="nav-link" *ngIf="hideBtn">Logout</a>
         </li>
       </ul>
     </div>
