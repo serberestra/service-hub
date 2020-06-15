@@ -46,8 +46,7 @@ export class SerivicelistComponent implements OnInit {
 
 
   constructor(
-    private ws: WorkerService
-  ) { }
+    private ws: WorkerService ) { }
   
 
   ngOnInit(): void {
@@ -60,7 +59,6 @@ export class SerivicelistComponent implements OnInit {
 
   }
 
-  //workers: Worker[] = this.ws.getAllWorkers();
 
 
   performFilter(filterValue: string): Worker[] {

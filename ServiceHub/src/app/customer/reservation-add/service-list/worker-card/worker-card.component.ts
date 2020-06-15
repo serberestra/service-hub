@@ -19,6 +19,10 @@ export class WorkerCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * 
+   * @param worker when this worker is selected from the list, it populate for form for reserving a service.
+   */
   onSelect(worker: Worker) {
     this.ws.setWorker(worker);
   }

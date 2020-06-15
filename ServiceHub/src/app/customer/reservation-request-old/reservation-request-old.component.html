@@ -52,7 +52,7 @@
         <div class="card-body">
           <p>worker: {{ res.firstName }} {{ res.lastName }}</p>
           <p>Company: {{ res.companyName }}</p>
-          <p>phone: {{ res.contact }} {{ res.lastName }}</p>
+          <p>phone: {{ res.contact }} </p>
           <p>date of service: {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
         </div>
         <div class="card-footer">: <button (click)="onSelect( res )"
