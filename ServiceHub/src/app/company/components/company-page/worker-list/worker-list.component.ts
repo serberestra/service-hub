@@ -33,7 +33,7 @@ export class WorkerListComponent implements OnInit {
             this.dataSource = new MatTableDataSource(data);
           }).add(() => {
             this.dataSource.sort = this.sort;
-            console.log(this.dataSource.sort);
+            console.log(this.sort);
           });
       }
     });
