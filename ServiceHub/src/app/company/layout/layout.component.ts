@@ -16,6 +16,10 @@ export class LayoutComponent implements OnInit {
   }
 
   reason = '';
+  /**
+   * closes the sidenav bar
+   * @param reason 
+   */
   close(reason: string) {
     this.reason = reason;
     this.sidenav.close();

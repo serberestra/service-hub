@@ -33,16 +33,23 @@ export class UpdateFormComponent implements OnInit {
 
   constructor(private ws: WorkerService) { }
 
+  /**
+   * gets the worker set by the update button in worker-list to be updated
+   */
   ngOnInit(): void {
     this.Wsubscription = this.ws.getWorker().subscribe((worker: Worker) => {
       this.worker = worker;
     });
-    // this.initForm();
   }
   get first() { return this.updateWorker.get('first') }
   get last() { return this.updateWorker.get('last') }
   get serv() { return this.updateWorker.get('serv') }
 
+  
+  /**
+   * Method changes the availability field depending on the state of the checkbox.
+   * @param isChecked 
+   */
   onChange(isChecked: boolean) {
     if (isChecked) {
       this.worker.available = true;
@@ -52,8 +59,13 @@ export class UpdateFormComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Method retrieves values from fields and sends them to function in worker-list component.
+  If a user does not change a field, the value of the field will be null, so the if checks 
+  prevent nulls from interfering and allow the function to work as intended.
+   */
   update() {
-    console.log(this.worker);
     if (this.first.value) {
       this.worker.firstName = this.first.value;
     }
@@ -68,17 +80,9 @@ export class UpdateFormComponent implements OnInit {
     }
     this.ws.update(this.worker).subscribe(data => {
       if (data) {
-        // this.initForm();
-        // this.resetForm();
         this.updateList.emit(true);
       }
     });
-  }
-
-  resetForm() {
-    this.first.setValue('');
-    this.last.setValue('');
-    this.serv.setValue('');
   }
 
 }

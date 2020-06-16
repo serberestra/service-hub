@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 })
 export class ReservationRequestOldComponent implements OnInit {
 
-  //private workerSubscription: Subscription;
   worker: Worker = {
     id: -1,
     firstName: "",
@@ -25,7 +24,7 @@ export class ReservationRequestOldComponent implements OnInit {
     companyId: -1,
     serviceName: "",
 
-  };  //  status: -1
+  }; 
 
   private reservationCatcherSubscription: Subscription;
   reservationCatcher: ReservationCatcher =
@@ -65,13 +64,12 @@ export class ReservationRequestOldComponent implements OnInit {
 
   reservation: Reservation = {
     id: 4,
-    bookedBy: "",      // is user id
+    bookedBy: "",      
     workerId: -9,
-    date: new Date(),         //  date: new Date(),  "2020/06/18"
+    date: new Date(),        
     status: true
   };
 
-  //private userSubscription: Subscription;
   private user: User = {
 
     id: "",
@@ -81,43 +79,34 @@ export class ReservationRequestOldComponent implements OnInit {
     phoneNumber: ""
   };
 
+  /**
+   * 
+   * @param as for current logged-in user
+   * @param rs to get previous reservations by user
+   */
   constructor(
 
     private as: AuthService,
     private rs: ReservationService
   ) {
 
-    //this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));         // if trying to use date, try this...
   }
 
+  /**
+   * sets user field to signed in user and gets all reservations booked by the current user
+   * Also gets a subscription to an object in the case that a user selects a previous
+   * reservation to book again
+   */
   ngOnInit(): void {
 
     this.as.loggedUser.subscribe(result => {
-      console.log('im in reservation add user', result);
       this.user = result;
     })
-    //console.log('im in reservation add user: ', this.user.id + " & " + this.user.username);
 
-    // per userId get all Rerservations per User
     this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
-      console.log("resList[0].companyName: " + resList[0].companyName);
-
       this.reservationArr = resList;
 
-      console.log("this is: resList.length: " + resList.length);
-
-      /**
-       * While this formats the date nicely in a readable format, it breaks the update and has to be changed back to a TimeStamp ??
-       */
-      // for (let index = 0; index < this.reservationArr.length; index++) {
-
-      //   //this.reservationArr.push(this.reservationArr[index]);
-      //    this.reservationArr[index].reservationDate = formatDate(this.reservation.date, 'MM-dd-yyyy', 'en-US').toString();
-      //   // this.reservation.date, 'dd-MM-yyyy', 'en-US').toString();
-      // }
-
     });
-    console.log("this is the length of this.reservationArr: " + this.reservationArr.length);
 
     this.reservationCatcherSubscription = this.rs.getReservationCatcher().subscribe((r: ReservationCatcher) => {
       this.reservationCatcher =
@@ -140,49 +129,34 @@ export class ReservationRequestOldComponent implements OnInit {
 
   }
 
-
-
-
+/**
+ * 
+ * @param reservation sets reservation to be subscribed to elsewhere in this form
+ */
   onSelect(reservation: ReservationCatcher) {
-
-    console.log("onSelect of RROldComp: " + reservation.service);
-    console.log("onSelect of RROldComp: " + reservation.firstName);
-    console.log("onSelect of RROldComp: " + reservation.lastName);
 
     this.rs.setReservationCatcher(reservation);
 
   }
 
   /**
- * SELECTING FROM LIST ON THE RIGHT IN TEMPLATE
+ * sends old reservation to the reservation service to book again 
  * @param reservation: the ReservationCatcher object to update 
  */
   onSubmit() {
-
-    // submit the edited reservation to a service
-    // in Reservation
-    console.log("this is Date: " + this.reservationCatcher.reservationDate);
-
-
-    // I should be waiting for a response ideally ..............................................................
     this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => {
-      console.log(res);
-      console.log("is it html: " + res.reservationDate);
-      this.updateList();
+    this.updateList();
     });
 
   }
 
+  /**
+   * Resets DOM
+   */
   updateList() {
 
     this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
-      console.log("resList[0].companyName: " + resList[0].companyName);
-
       this.reservationArr = resList;
-
-      console.log("this is: resList.length: " + resList.length);
-
-
     });
 
   }

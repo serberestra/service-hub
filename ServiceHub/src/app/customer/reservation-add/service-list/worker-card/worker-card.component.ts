@@ -12,6 +12,10 @@ export class WorkerCardComponent implements OnInit {
 
   @Input() worker: Worker;
 
+  /**
+   * Worker service necessary for cross component transfer
+   * @param ws 
+   */
   constructor(
     private ws: WorkerService,
   ) { }
@@ -19,6 +23,10 @@ export class WorkerCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Sets the actual worker to be transferred to reservation-add
+   * @param worker 
+   */
   onSelect(worker: Worker) {
     this.ws.setWorker(worker);
   }

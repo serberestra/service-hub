@@ -22,15 +22,9 @@ export class ReservationService {
 
   /**
    * 
-   * POST  a new reservation
+   * Creates a new reservation
    *    
-   * @param reservation {
-    "id": 2,                  needs this but that should not be...
-    "bookedBy": "1010",       soon to get User id...
-    "workerId": 3,            yes
-    "date": "10/10/2020",     ...
-    "status": 1               boolean/1 to change to string...
-    }
+   * @param reservation Reservation to be created
    */
   register(reservation: Reservation) {
     console.log("for ReservationService: bookBy: " + reservation.bookedBy);
@@ -38,44 +32,51 @@ export class ReservationService {
 
   }
 
-  /**
-   * //  http://localhost:9191/api/reservations-view/user/
-   */
+ /**
+  * Gets reservations specific to a user
+  * @param id The actual user ID
+  */
   listOfReservationsByUserId(id: string): Observable<ReservationCatcher[]> {
 
-    return this.http.get<ReservationCatcher[]>(`http://localhost:9191/api/reservations-view/user/${id}`);
+    return this.http.get<ReservationCatcher[]>(`${environment.localUrl}reservations-view/user/${id}`);
 
   }
 
   /**
-   * UPDATE ReservationCatcher
-   * @PutMapping("/reservation-view")
+   * Adds a new Reservation to the list of old reservations 
+   * @param resCatcher the reservation to be added
    */
   updateReservationCatcher(resCatcher: ReservationCatcher): Observable<ReservationCatcher> {
-    console.log("this is Date up in ReservationService: " + resCatcher.reservationDate);
-    console.log(resCatcher);
-    // comment
-
-    return this.http.put<ReservationCatcher>('http://localhost:9191/api/reservation-view', resCatcher);
+    return this.http.put<ReservationCatcher>(`${environment.localUrl}reservation-view`, resCatcher);
   }
 
+  /**
+   * Sets a reservation to be added and later subscribed to
+   * @param resCatcher reservation to be set
+   */
   setReservationCatcher(resCatcher: ReservationCatcher) {
     this.selectedReservationCatcher.next(resCatcher);
   }
 
+  /**
+   * Gets the set reservation upon being called.
+   */
   getReservationCatcher() {
     return this.selectedReservationCatcher.asObservable();
   }
 
   /**
-   * Get company by Id
-   * @param id 
+   * Intended to get the ID of the company by the User ID
+   * @param id user id
    */
   getCompanyByUserId(id: number): Observable<Company> {
     return this.http.get<Company>(`${environment.localUrl}company/user/` + id)
   }
-  //Corrections getCompanyByUserId and getByCompany
-
+ 
+/**
+ * Gets list of reservations by company
+ * @param id id of the company to search for
+ */
   getByCompany(id: number): Observable<ResView[]> {
     return this.http.get<ResView[]>(`${environment.localUrl}reservations-view/company/` + id)
   }

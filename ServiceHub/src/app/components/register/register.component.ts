@@ -27,6 +27,13 @@ export class RegisterComponent implements OnInit {
   get rePassword() { return this.registerUser.get('rePassword'); }
   get phoneNumber() { return this.registerUser.get('phoneNumber'); }
 
+  
+  /**
+   * 
+   * @param registerService 
+   * @param _snackBar 
+   * @param router 
+   */
   constructor(
     private registerService: RegisterService,
     private _snackBar: OpenSnackBarService,
@@ -36,6 +43,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Creates user and redirects user to log in if both password entries line up
+   */
   onSubmit() {
     if (this.password.value === this.rePassword.value) {
       let user: User = this.registerUser.value;

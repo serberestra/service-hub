@@ -14,6 +14,12 @@ export class MainComponent implements OnInit {
   servicesList: Worker[];
   filteredWorkers: Worker[];
 
+  /**
+   * Loads all workers to display on the main page
+   * @param workerService 
+   * @param authService 
+   * @param _snackBar 
+   */
   constructor(
     private workerService: WorkerService,
     private authService: AuthService,
@@ -30,6 +36,9 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Tells users to log in upon selecting a service
+   */
   selectedService() {
     if (this.authService.isAuthenticated()) {
       // TODO - 
@@ -51,6 +60,10 @@ export class MainComponent implements OnInit {
     //        if-true                            if-false
   }
 
+  /**
+   * Filter allowing users to search for services
+   * @param filterValue 
+   */
   performFilter(filterValue: string): Worker[] {
     filterValue = filterValue.toLocaleLowerCase();
 

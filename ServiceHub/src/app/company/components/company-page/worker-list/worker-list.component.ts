@@ -19,20 +19,22 @@ export class WorkerListComponent implements OnInit {
   dataSource: MatTableDataSource<Worker>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // workers: Worker[];
-  // wFilter: Worker[];
-  // uid: number;
   renderHtml: boolean = false;
+
   dialogRef: any;
 
+  /**
+   * gets list of workers
+   * @param service 
+   * @param as 
+   * @param dialog
+   */
   constructor(private service: WorkerService, private as: AuthService, public dialog: MatDialog) {
     this.as.loggedCompany.subscribe(result => {
       if (result) {
         this.renderHtml = true;
         this.service.getCompanyWorkers(result.id)
           .subscribe(data => {
-            // this.workers = data;
-            // this.wFilter = data;
             this.dataSource = new MatTableDataSource(data);
           }).add(() => {
             this.dataSource.sort = this.sort;
@@ -48,19 +50,20 @@ export class WorkerListComponent implements OnInit {
       data: worker
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
+
   }
 
-  // uWorker: Worker;
   sight: boolean = false;
 
   ngOnInit(): void {
 
   }
 
+  /**
+   * 
+   * @param dWorker 
+   * passes a worker to delete function
+   */
   Delete(dWorker: Worker): void {
     this.service.delete(dWorker.id)
       .subscribe(data => {
@@ -69,17 +72,28 @@ export class WorkerListComponent implements OnInit {
       });
   }
 
+  /**
+   * selects the worker, passes values into service for retrieval by other components.
+   * @param upWorker 
+   */
+
   Update(upWorker: Worker): void {
-    this.sight = true;
-    this.openDialog(upWorker);
+    this.sight = true
     this.service.setWorker(upWorker);
   }
 
+  /**
+   * filters table
+   * @param event 
+   */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /**
+   * updates DOM upon delete or update operation
+   */
   updateList() {
     this.as.loggedCompany.subscribe(result => {
       if (result) {

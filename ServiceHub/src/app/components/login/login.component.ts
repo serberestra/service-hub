@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   get email() { return this.loginForm.get('email') };
   get password() { return this.loginForm.get('password') };
 
+  /**
+   * 
+   * @param authService for passing to login method
+   * @param router for routing to next page
+   */
   constructor(
     private authService: AuthService,
     private router: Router
@@ -31,6 +36,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * sends email and password to login service and navigates to appropriate page
+   */
   onSubmit() {
     this.authService.login(this.email.value, this.password.value)
       .subscribe(result => {

@@ -8,6 +8,10 @@ import { AuthService } from "../../../services/auth.service";
 export class CompanyPageComponent implements OnInit {
 
   name: string = "";
+  /**
+   * Sets the title of the page to the name of the logged in company
+   * @param as gets the logged in company
+   */
   constructor(private as: AuthService) {
   }
 
