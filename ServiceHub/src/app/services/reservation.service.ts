@@ -80,4 +80,9 @@ export class ReservationService {
     return this.http.get<ResView[]>(`${environment.localUrl}reservations-view/company/` + id)
   }
 
+  deleteReservationCatcher(id: string): Observable<any> {
+    return this.http.delete<any>(`http://localhost:9191/api/reservation-view/${id}`); // reservation-view
+                          //   http://localhost:9191/api/reservation-view/
+  }
+
 }

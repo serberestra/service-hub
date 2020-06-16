@@ -39,6 +39,7 @@
         <p class="card-text"><strong>Phone:</strong> {{ res.contact }} {{ res.lastName }}</p>
         <p class="card-text"><strong>Date of service:</strong> {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
         <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button>
+        <button (click)="onDelete( res )" class="btn btn-sm btn-outline-primary ml-4">Delete/Cancel</button>
       </div>
     </div>
 

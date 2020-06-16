@@ -187,4 +187,16 @@ export class ReservationRequestOldComponent implements OnInit {
 
   }
 
+  onDelete(reservation : ReservationCatcher) {
+
+    console.log("delete ran with id: " + reservation.reservationId);
+
+    this.rs.deleteReservationCatcher(reservation.reservationId).subscribe(()=>{
+      this.updateList();
+    });
+
+    
+
+  }
+
 }
