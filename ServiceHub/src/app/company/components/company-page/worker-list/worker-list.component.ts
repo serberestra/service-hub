@@ -49,8 +49,6 @@ export class WorkerListComponent implements OnInit {
       width: '350px',
       data: worker
     });
-
-
   }
 
   sight: boolean = false;
@@ -78,6 +76,7 @@ export class WorkerListComponent implements OnInit {
    */
 
   Update(upWorker: Worker): void {
+    this.openDialog(upWorker);
     this.sight = true
     this.service.setWorker(upWorker);
   }
