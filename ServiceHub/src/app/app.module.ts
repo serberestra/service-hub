@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { APP_BASE_HREF } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    [{ provide: APP_BASE_HREF, useValue: '/' }]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

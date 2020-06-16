@@ -33,7 +33,7 @@ export class ReservationAddComponent implements OnInit {
     id: 4,
     bookedBy: "",      // is user id
     workerId: -9,
-    date: new Date(),      
+    date: new Date(),
     status: true
   };
 
@@ -47,7 +47,6 @@ export class ReservationAddComponent implements OnInit {
     phoneNumber: ""
   };
 
-
   /**
    * 
    * @param as Checks for logged in user
@@ -58,7 +57,7 @@ export class ReservationAddComponent implements OnInit {
   constructor(
     private as: AuthService,
     private ws: WorkerService,
-    private rs: ReservationService ) { }
+    private rs: ReservationService) { }
 
   /**
    * sets user value and selected worker to pass values to backend
@@ -91,17 +90,18 @@ export class ReservationAddComponent implements OnInit {
     }
 
     this.reservation.id = 99;
-
     this.reservation.bookedBy = this.user.id;
-
     this.reservation.workerId = this.worker.id;
-
     this.reservation.status = true;
 
-    this.rs.register(this.reservation).toPromise().then(res => {
-      console.log(res);
-      form.resetForm();
-    }).catch(err => console.log(err));
+    // this.rs.register(this.reservation).toPromise().then(res => {
+    //   form.resetForm();
+    // }).catch(err => console.log(err));
+
+    this.rs.register(this.reservation).subscribe(res => {
+      if (res)
+        form.resetForm();
+    });
   }
 
 }

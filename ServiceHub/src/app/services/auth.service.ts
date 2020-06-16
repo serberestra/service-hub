@@ -22,6 +22,8 @@ export class AuthService {
   loggedCompany = this.companySource.asObservable();
   hideLogout = this.sourceLogout.asObservable();
 
+  authUser: User;
+
   /**
    * 
    * @param http for making AJAX calls
@@ -48,13 +50,14 @@ export class AuthService {
     return this.http.post<User>(`${environment.localUrl}auth`, user)
       .pipe(map((result) => {
         if (result) {
+          this.setAuthUser(result);
+          result.password = null;
           if (result['userType'] === 'company') {
             this.reService.getCompanyByUserId(parseInt(result['id']))
               .subscribe(company => {
                 this.companySource.next(company);
               })
           }
-          this.userSource.next(result);
         }
         return result;
       }));
@@ -66,6 +69,12 @@ export class AuthService {
    */
   setHide(hide: boolean) {
     this.sourceLogout.next(hide);
+  }
+
+  setAuthUser(user: User) {
+    this.authUser = user;
+    this.authUser.password = null;
+    this.userSource.next(this.authUser);
   }
 
   /**

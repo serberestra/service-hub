@@ -9,6 +9,7 @@ import { AuthService } from "../../services/auth.service";
 export class NavbarComponent implements OnInit {
 
   hideBtn: boolean = false;
+  username: string = '';
   /**
    * 
    * @param authService for logging out if user clicks on logout
@@ -21,7 +22,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.hideLogout.subscribe(result => {
       this.hideBtn = result;
+      if (result) {
+        this.authService.loggedUser.subscribe(rUser => {
+          if (rUser)
+            this.username = rUser.username;
+        })
+      }
     });
+
   }
 
   /**
@@ -29,6 +37,7 @@ export class NavbarComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+    this.username = '';
   }
 
 

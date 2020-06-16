@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCatcher } from "../../models/reservationCatcher.model";
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ReservationRequestOldComponent implements OnInit {
     companyId: -1,
     serviceName: "",
 
-  }; 
+  };
 
   private reservationCatcherSubscription: Subscription;
   reservationCatcher: ReservationCatcher =
@@ -64,9 +65,9 @@ export class ReservationRequestOldComponent implements OnInit {
 
   reservation: Reservation = {
     id: 4,
-    bookedBy: "",      
+    bookedBy: "",
     workerId: -9,
-    date: new Date(),        
+    date: new Date(),
     status: true
   };
 
@@ -129,10 +130,10 @@ export class ReservationRequestOldComponent implements OnInit {
 
   }
 
-/**
- * 
- * @param reservation sets reservation to be subscribed to elsewhere in this form
- */
+  /**
+   * 
+   * @param reservation sets reservation to be subscribed to elsewhere in this form
+   */
   onSelect(reservation: ReservationCatcher) {
 
     this.rs.setReservationCatcher(reservation);
@@ -143,10 +144,14 @@ export class ReservationRequestOldComponent implements OnInit {
  * sends old reservation to the reservation service to book again 
  * @param reservation: the ReservationCatcher object to update 
  */
-  onSubmit() {
-    this.rs.updateReservationCatcher(this.reservationCatcher).subscribe(res => {
-    this.updateList();
-    });
+  onSubmit(form: NgForm) {
+    this.rs.updateReservationCatcher(this.reservationCatcher)
+      .subscribe(res => {
+        if (res) {
+          form.resetForm();
+          this.updateList();
+        }
+      });
 
   }
 
@@ -154,22 +159,16 @@ export class ReservationRequestOldComponent implements OnInit {
    * Resets DOM
    */
   updateList() {
-
     this.rs.listOfReservationsByUserId(this.user.id).subscribe((resList: ReservationCatcher[]) => {
       this.reservationArr = resList;
     });
 
   }
 
-  onDelete(reservation : ReservationCatcher) {
-
-    console.log("delete ran with id: " + reservation.reservationId);
-
-    this.rs.deleteReservationCatcher(reservation.reservationId).subscribe(()=>{
+  onDelete(reservation: ReservationCatcher) {
+    this.rs.deleteReservationCatcher(reservation.reservationId).subscribe(() => {
       this.updateList();
     });
-
-    
 
   }
 

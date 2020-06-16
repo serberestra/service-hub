@@ -28,14 +28,14 @@ export class ReservationService {
    */
   register(reservation: Reservation) {
     console.log("for ReservationService: bookBy: " + reservation.bookedBy);
-    return this.http.post<Reservation>('http://localhost:9191/api/reservation', reservation);
+    return this.http.post<Reservation>(environment.localUrl + 'reservation', reservation);
 
   }
 
- /**
-  * Gets reservations specific to a user
-  * @param id The actual user ID
-  */
+  /**
+   * Gets reservations specific to a user
+   * @param id The actual user ID
+   */
   listOfReservationsByUserId(id: string): Observable<ReservationCatcher[]> {
 
     return this.http.get<ReservationCatcher[]>(`${environment.localUrl}reservations-view/user/${id}`);
@@ -72,18 +72,17 @@ export class ReservationService {
   getCompanyByUserId(id: number): Observable<Company> {
     return this.http.get<Company>(`${environment.localUrl}company/user/` + id)
   }
- 
-/**
- * Gets list of reservations by company
- * @param id id of the company to search for
- */
+
+  /**
+   * Gets list of reservations by company
+   * @param id id of the company to search for
+   */
   getByCompany(id: number): Observable<ResView[]> {
     return this.http.get<ResView[]>(`${environment.localUrl}reservations-view/company/` + id)
   }
 
   deleteReservationCatcher(id: string): Observable<any> {
-    return this.http.delete<any>(`http://localhost:9191/api/reservation-view/${id}`); // reservation-view
-                          //   http://localhost:9191/api/reservation-view/
+    return this.http.delete<any>(`${environment.localUrl}reservation-view/${id}`);
   }
 
 }

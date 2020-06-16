@@ -23,8 +23,6 @@ export class SerivicelistComponent implements OnInit {
     //        if-true                            if-false
   }
 
-
-
   actualInputField_forName = '';
 
   get inputField_forName() {
@@ -38,20 +36,15 @@ export class SerivicelistComponent implements OnInit {
     //        if-true                            if-false
   }
 
-
-
-
   workers: Worker[];
   filteredWorkers: Worker[];
-
 
   /**
    * worker service necessary to get workers to display
    * @param ws 
    */
   constructor(
-    private ws: WorkerService ) { }
-  
+    private ws: WorkerService) { }
 
   /**
    * the actual getting of all the workers
@@ -60,14 +53,10 @@ export class SerivicelistComponent implements OnInit {
 
     this.ws.getAllWorkers().subscribe(workers => {
       this.workers = workers;
-      console.log("this.workers.length: " + this.workers.length);
       this.filteredWorkers = this.workers;
     });
 
   }
-
-
-
 
   /**
    * A filter by name of worker's service
@@ -82,7 +71,6 @@ export class SerivicelistComponent implements OnInit {
     );
   }
 
-
   /**
    * filtering by worker's first name
    * @param filterValue 
@@ -95,7 +83,5 @@ export class SerivicelistComponent implements OnInit {
         worker.firstName.toLocaleLowerCase().indexOf(filterValue) !== -1
     );
   }
-
-
 
 }

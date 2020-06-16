@@ -3,7 +3,7 @@
   <div class="col-12 col-md-5">
     <div class="card mb-3 border-info shadow">
       <div class="card-body">
-        <form ngNativeValidate (submit)="onSubmit()" #service="ngForm">
+        <form ngNativeValidate (submit)="onSubmit(service)" #service="ngForm">
           <h4 id="serviceModalLabel">Reserve Same Service</h4>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Date:</mat-label>
@@ -36,7 +36,7 @@
         <h3 class="card-title"><strong>{{ res.service }}</strong></h3>
         <h6 class="card-subtitle mb-2 text-muted">{{ res.companyName }}</h6>
         <p class="card-text"><strong>Worker:</strong> {{ res.firstName }} {{ res.lastName }}</p>
-        <p class="card-text"><strong>Phone:</strong> {{ res.contact }} {{ res.lastName }}</p>
+        <p class="card-text"><strong>Phone:</strong> {{ res.contact }} </p>
         <p class="card-text"><strong>Date of service:</strong> {{ res.reservationDate | date: 'MM/dd/yyy' : 'GMT' }}</p>
         <button (click)="onSelect( res )" class="btn btn-sm btn-outline-primary ml-4">Update/Reschedule</button>
         <button (click)="onDelete( res )" class="btn btn-sm btn-outline-primary ml-4">Delete/Cancel</button>

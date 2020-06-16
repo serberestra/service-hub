@@ -31,6 +31,6 @@ export class RegisterService {
    * @param Company Company to be created
    */
   createCompany(company: Company): Observable<Company> {
-    return this.http.post<Company>(environment.localUrl + '/company', company);
+    return this.http.post<Company>(environment.localUrl + 'company', company);
   }
 }
