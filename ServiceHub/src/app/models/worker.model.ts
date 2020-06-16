@@ -1,3 +1,7 @@
+/**
+ * Defines Worker model for communication with backend with fields containing
+ * appropriate information.
+ */
 export class Worker {
 
     constructor(

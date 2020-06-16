@@ -45,11 +45,18 @@ export class SerivicelistComponent implements OnInit {
   filteredWorkers: Worker[];
 
 
+  /**
+   * worker service necessary to get workers to display
+   * @param ws 
+   */
   constructor(
     private ws: WorkerService
   ) { }
   
 
+  /**
+   * the actual getting of all the workers
+   */
   ngOnInit(): void {
 
     this.ws.getAllWorkers().subscribe(workers => {
@@ -60,9 +67,13 @@ export class SerivicelistComponent implements OnInit {
 
   }
 
-  //workers: Worker[] = this.ws.getAllWorkers();
 
 
+
+  /**
+   * A filter by name of worker's service
+   * @param filterValue 
+   */
   performFilter(filterValue: string): Worker[] {
     filterValue = filterValue.toLocaleLowerCase();
 
@@ -73,6 +84,10 @@ export class SerivicelistComponent implements OnInit {
   }
 
 
+  /**
+   * filtering by worker's first name
+   * @param filterValue 
+   */
   performFilter_forName(filterValue: string): Worker[] {
     filterValue = filterValue.toLocaleLowerCase();
 

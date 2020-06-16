@@ -1,16 +1,13 @@
+/**
+ * Defines Reservation model to be sent to backend with fields containing appropriate information
+ */
 export class Reservation {
 
     constructor(
         public id: number,
-        public bookedBy: string,      // is user id  //  bookedBy
+        public bookedBy: string,      
         public workerId: number,
-        public date: Date, //Date
-        public status: boolean,  // will change to a string soon  !!
-
-        
-        // Company( workers[] ) .....  I think this is what we need ?? ?? ?? ?????? 
-
-        // Company name ?
-        // Worker
+        public date: Date, 
+        public status: boolean
     ){}
 }

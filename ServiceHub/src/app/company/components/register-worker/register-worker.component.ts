@@ -42,6 +42,9 @@ export class RegisterWorkerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * passes fields into create worker function and redirects to main company page
+   */
   onSubmit() {
     this.worker = this.registerWorker.value;
     this.worker.companyId = this.companyId;

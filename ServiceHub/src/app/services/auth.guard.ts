@@ -8,8 +8,18 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
+  /**
+   * 
+   * @param router tells router what to do
+   * @param authService checks for user being logged in to determine behavior
+   */
   constructor(private router: Router, private authService: AuthService) { }
 
+  /**
+   * Returns true value if user is authenticated
+   * @param next Metadata on where the route is headed
+   * @param state Metadata on the current state of the route, including current URL
+   */
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -17,17 +27,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.checkLogin(url);
   }
 
+  /**
+   * Initial entry method that provides routing information
+   * @param next Metadata on where the route is headed
+   * @param state Metadata on the current state of the route
+   */
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.canActivate(next, state);
   }
 
+  /**
+   * Does the actual url check and navigates to login if false
+   * If false, also stores attempted URL
+   * @param url the url to be checked
+   */
   checkLogin(url: string): boolean {
     if (this.authService.isAuthenticated()) { return true; }
-    // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
-    // Navigate to the login page with extras
     this.router.navigate(['/login']);
     return false;
   }

@@ -17,12 +17,21 @@ export class ServiceHistoryComponent implements OnInit {
   cid : number;
   res : ResView[] = [];
   fres : ResView[]; 
+
+  /**
+   * 
+   * @param rs 
+   * @param as 
+   */
   constructor(private rs:ReservationService,
               private as: AuthService ) { }
   
 displayedColumns: string[] = ['ID', 'Date', 'Service', 'BookedBy', 'WorkerID' ];
 dataSource: MatTableDataSource<ResView>;            
 
+/**
+ * provides all reservations that have been booked and formats date
+ */
   ngOnInit(): void {
     this.as.loggedCompany.subscribe(result => this.cid = result.id);
     console.log(this.cid);
@@ -38,7 +47,10 @@ dataSource: MatTableDataSource<ResView>;
     this.dataSource = new MatTableDataSource(this.res);
   });
   }
-
+/**
+ * filters reservations
+ * @param event 
+ */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

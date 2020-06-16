@@ -1,3 +1,6 @@
+/**
+ * Defines Reservation View model with fields containing appropriate information
+ */
 export class ResView{
     constructor(
         public reservationId : number,

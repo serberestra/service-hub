@@ -51,6 +51,13 @@ export class ReservationAddComponent implements OnInit {
   };
 
 
+  /**
+   * 
+   * @param as Checks for logged in user
+   * @param ws gets the worker assigned
+   * @param rs sets reservation status
+   * @param datePipe sets date format
+   */
   constructor(
     private as: AuthService,
     private ws: WorkerService,
@@ -61,6 +68,9 @@ export class ReservationAddComponent implements OnInit {
     this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
   }
 
+  /**
+   * sets user value and selected worker to pass values to backend
+   */
   ngOnInit(): void {
 
     this.as.loggedUser.subscribe(result => {
@@ -71,9 +81,16 @@ export class ReservationAddComponent implements OnInit {
     });
   }
 
+  /**
+   * Deselects worker
+   */
   ngOnDestroy() {
     this.workerSubscription.unsubscribe();
   }
+  /**
+   * 
+   * @param form gets form values to set variables
+   */
 
   onSubmit(form: NgForm) {
 

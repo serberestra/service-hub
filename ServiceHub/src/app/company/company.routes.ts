@@ -6,6 +6,11 @@ import { AuthGuard } from '../services/auth.guard';
 import { ServiceHistoryComponent } from './components/company-page/service-history/service-history.component';
 import { RoleGuard } from '../services/role.guard';
 
+/**
+ * Defines routes to be taken within company module
+ * Sets roleguards and authguards to ensure user is a legitimate company user
+ * Routes to Main company page, service history and worker creation.
+ */
 export const companyRoutes: Routes = [
     {
         path: 'company',

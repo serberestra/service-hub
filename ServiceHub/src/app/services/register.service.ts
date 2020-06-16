@@ -10,12 +10,16 @@ import { Company } from '../models/company.model';
 })
 export class RegisterService {
 
+  /**
+   * 
+   * @param http for making the AJAX calls.
+   */
   constructor(private http: HttpClient) { }
 
   /**
    * CreateCustomer()
-   * Method to create a customer.
-   * @param User
+   * Sends AJAX call to create customer in backend
+   * @param User Customer to create
    */
   createCustomer(user: User): Observable<User> {
     return this.http.post<User>(environment.localUrl + 'user', user);
@@ -23,8 +27,8 @@ export class RegisterService {
 
   /**
    * createCompany
-   * Method to create a company.
-   * @param Company
+   * sends AJAX call to create company in backend
+   * @param Company Company to be created
    */
   createCompany(company: Company): Observable<Company> {
     return this.http.post<Company>(environment.localUrl + '/company', company);

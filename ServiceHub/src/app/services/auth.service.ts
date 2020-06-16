@@ -22,6 +22,12 @@ export class AuthService {
   loggedCompany = this.companySource.asObservable();
   hideLogout = this.sourceLogout.asObservable();
 
+  /**
+   * 
+   * @param http for making AJAX calls
+   * @param router for redirects once authenticated
+   * @param reService for finding company IDs
+   */
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -29,9 +35,10 @@ export class AuthService {
   ) { }
 
   /**
-   * Method of Authentication
-   * @param username 
-   * @param password 
+   * Method of Authentication. Returns observable based on whether user is Customer or company
+   * If company, gets the company ID and emits a seperate observable
+   * @param username username to be checked
+   * @param password password to be checked
    */
   login(username: string, password: string): Observable<User> {
     let user: User = {
@@ -53,20 +60,33 @@ export class AuthService {
       }));
   }
 
+  /**
+   * Sends flag to logout
+   * @param hide flag in question
+   */
   setHide(hide: boolean) {
     this.sourceLogout.next(hide);
   }
 
+  /**
+   * Removes current session state
+   */
   clear(): void {
     this.userSource.next(null);
   }
 
+  /**
+   * Check to determine if user is logged in
+   */
   isAuthenticated(): boolean {
     let flag = false;
     this.loggedUser.subscribe(result => flag = result);
     return flag;
   }
 
+  /**
+   * perfoms all logout methods.
+   */
   logout(): void {
     this.setHide(false);
     this.clear();

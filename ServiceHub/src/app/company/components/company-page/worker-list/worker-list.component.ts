@@ -17,19 +17,19 @@ export class WorkerListComponent implements OnInit {
   dataSource: MatTableDataSource<Worker>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // workers: Worker[];
-  // wFilter: Worker[];
-  // uid: number;
   renderHtml: boolean = false;
-
+  
+ /**
+  * gets list of workers
+  * @param service 
+  * @param as 
+  */
   constructor(private service: WorkerService, private as: AuthService) {
     this.as.loggedCompany.subscribe(result => {
       if (result) {
         this.renderHtml = true;
         this.service.getCompanyWorkers(result.id)
           .subscribe(data => {
-            // this.workers = data;
-            // this.wFilter = data;
             this.dataSource = new MatTableDataSource(data);
           }).add(() => {
             this.dataSource.sort = this.sort;
@@ -39,36 +39,18 @@ export class WorkerListComponent implements OnInit {
     });
   }
 
-  // uWorker: Worker;
   sight: boolean = false;
-  // actualInputfield = '';
 
-  // get inputField() {
-  //   return this.actualInputfield;
-  // }
-  // set inputField(temp: string) {
-  //   this.actualInputfield = temp;
-  //   this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
-  // }
 
   ngOnInit(): void {
-    // this.updateList();
-    // this.dataSource.sort = this.sort;
-    // this.as.loggedCompany.subscribe(result => {
-    //   if (result) {
-    //     this.renderHtml = true;
-    //     this.service.getCompanyWorkers(result.id)
-    //       .subscribe(data => {
-    //         // this.workers = data;
-    //         // this.wFilter = data;
-    //         this.dataSource = new MatTableDataSource(data);
-    //         this.dataSource.sort = this.sort;
-    //       });
-    //   }
-    // });
 
   }
 
+  /**
+   * 
+   * @param dWorker 
+   * passes a worker to delete function
+   */
   Delete(dWorker: Worker): void {
     this.service.delete(dWorker.id)
       .subscribe(data => {
@@ -77,33 +59,34 @@ export class WorkerListComponent implements OnInit {
       });
   }
 
+  /**
+   * selects the worker, passes values into service for retrieval by other components.
+   * @param upWorker 
+   */
+
   Update(upWorker: Worker): void {
     this.sight = true
     this.service.setWorker(upWorker);
   }
 
-  // performFilter(filterValue: string): Worker[] {
-  //   filterValue = filterValue.toLocaleLowerCase();
-
-  //   return this.workers.filter(
-  //     (fwork: Worker) =>
-  //       fwork.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
-  //   );
-  // }
-
+/**
+ * filters table
+ * @param event 
+ */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /**
+   * updates DOM upon delete or update operation
+   */
   updateList() {
     this.as.loggedCompany.subscribe(result => {
       if (result) {
         this.renderHtml = true;
         this.service.getCompanyWorkers(result.id)
           .subscribe(data => {
-            // this.workers = data;
-            // this.wFilter = data;
             this.dataSource = new MatTableDataSource(data);
           });
       }
