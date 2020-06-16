@@ -3,9 +3,7 @@ import { Worker } from "../../models/worker.model";
 import { WorkerService } from "../../services/worker.service";
 import { Subscription } from 'rxjs';
 import { Reservation } from "../../models/reservation.model";
-import { formatDate } from '@angular/common';
 import { ReservationService } from "../../services/reservation.service";
-import { DatePipe } from '@angular/common';
 import { AuthService } from "../../services/auth.service";
 import { User } from 'src/app/models/user.model';
 import { NgForm } from '@angular/forms';
@@ -14,8 +12,7 @@ declare var $: any;
 @Component({
   selector: 'app-reservation-add',
   templateUrl: './reservation-add.component.html',
-  styleUrls: ['./reservation-add.component.scss'],
-  providers: [DatePipe]
+  styleUrls: ['./reservation-add.component.scss']
 })
 export class ReservationAddComponent implements OnInit {
 
@@ -36,11 +33,11 @@ export class ReservationAddComponent implements OnInit {
     id: 4,
     bookedBy: "",      // is user id
     workerId: -9,
-    date: new Date(),         //  date: new Date(),  "2020/06/18"
+    date: new Date(),      
     status: true
   };
 
-  private userSubscription: Subscription;
+
   private user: User = {
 
     id: "",
@@ -61,12 +58,7 @@ export class ReservationAddComponent implements OnInit {
   constructor(
     private as: AuthService,
     private ws: WorkerService,
-    private rs: ReservationService,
-    public datePipe: DatePipe,
-  ) {
-
-    this.reservation.date = new Date(formatDate(this.reservation.date, 'yyyy-MM-dd', 'en-US'));
-  }
+    private rs: ReservationService ) { }
 
   /**
    * sets user value and selected worker to pass values to backend
@@ -100,9 +92,7 @@ export class ReservationAddComponent implements OnInit {
 
     this.reservation.id = 99;
 
-    this.myString = this.user.id;
-
-    this.reservation.bookedBy = this.myString;
+    this.reservation.bookedBy = this.user.id;
 
     this.reservation.workerId = this.worker.id;
 

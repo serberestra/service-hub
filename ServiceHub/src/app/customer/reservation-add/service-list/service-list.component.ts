@@ -50,8 +50,7 @@ export class SerivicelistComponent implements OnInit {
    * @param ws 
    */
   constructor(
-    private ws: WorkerService
-  ) { }
+    private ws: WorkerService ) { }
   
 
   /**
