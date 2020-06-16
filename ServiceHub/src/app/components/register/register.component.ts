@@ -37,15 +37,18 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('in register', this.password.value === this.rePassword.value)
     if (this.password.value === this.rePassword.value) {
       let user: User = this.registerUser.value;
       user.userType = 'user';
       this.registerService.createCustomer(user)
         .subscribe(result => {
-          this.registerUser.reset({});
-          this._snackBar.open('User created successfully', '');
-          this.router.navigate(['/login']);
+          if (result) {
+            this.registerUser.reset({});
+            this._snackBar.open('User created successfully', '');
+            this.router.navigate(['/login']);
+          } else {
+            this._snackBar.open('The username already exist', '');
+          }
         })
     } else {
       this.matchPass = true;

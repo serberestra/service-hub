@@ -57,8 +57,12 @@ export class RegisterCompanyComponent implements OnInit {
                   this.registerCompany.reset({});
                   this._snackBar.open('Company created successfully', '');
                   this.router.navigate(['/login']);
+                } else {
+                  this._snackBar.open('Company creation failed', '');
                 }
               })
+          } else {
+            this._snackBar.open('Company email already exist', '');
           }
         })
     } else {

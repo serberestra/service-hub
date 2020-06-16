@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { Worker } from "../../../../models/worker.model";
 import { WorkerService } from '../../../../services/worker.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { EventEmitter } from 'protractor';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormErrorMatcher } from 'src/app/services/form-error-matcher';
 
 @Component({
   selector: 'app-worker-list',
@@ -21,8 +23,9 @@ export class WorkerListComponent implements OnInit {
   // wFilter: Worker[];
   // uid: number;
   renderHtml: boolean = false;
+  dialogRef: any;
 
-  constructor(private service: WorkerService, private as: AuthService) {
+  constructor(private service: WorkerService, private as: AuthService, public dialog: MatDialog) {
     this.as.loggedCompany.subscribe(result => {
       if (result) {
         this.renderHtml = true;
@@ -39,33 +42,22 @@ export class WorkerListComponent implements OnInit {
     });
   }
 
+  openDialog(worker: Worker): void {
+    this.dialogRef = this.dialog.open(DialogWorker, {
+      width: '350px',
+      data: worker
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
+  }
+
   // uWorker: Worker;
   sight: boolean = false;
-  // actualInputfield = '';
-
-  // get inputField() {
-  //   return this.actualInputfield;
-  // }
-  // set inputField(temp: string) {
-  //   this.actualInputfield = temp;
-  //   this.wFilter = this.actualInputfield ? this.performFilter(this.inputField) : this.workers;
-  // }
 
   ngOnInit(): void {
-    // this.updateList();
-    // this.dataSource.sort = this.sort;
-    // this.as.loggedCompany.subscribe(result => {
-    //   if (result) {
-    //     this.renderHtml = true;
-    //     this.service.getCompanyWorkers(result.id)
-    //       .subscribe(data => {
-    //         // this.workers = data;
-    //         // this.wFilter = data;
-    //         this.dataSource = new MatTableDataSource(data);
-    //         this.dataSource.sort = this.sort;
-    //       });
-    //   }
-    // });
 
   }
 
@@ -78,18 +70,10 @@ export class WorkerListComponent implements OnInit {
   }
 
   Update(upWorker: Worker): void {
-    this.sight = true
+    this.sight = true;
+    this.openDialog(upWorker);
     this.service.setWorker(upWorker);
   }
-
-  // performFilter(filterValue: string): Worker[] {
-  //   filterValue = filterValue.toLocaleLowerCase();
-
-  //   return this.workers.filter(
-  //     (fwork: Worker) =>
-  //       fwork.serviceName.toLocaleLowerCase().indexOf(filterValue) !== -1
-  //   );
-  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -102,12 +86,85 @@ export class WorkerListComponent implements OnInit {
         this.renderHtml = true;
         this.service.getCompanyWorkers(result.id)
           .subscribe(data => {
-            // this.workers = data;
-            // this.wFilter = data;
             this.dataSource = new MatTableDataSource(data);
           });
       }
     });
+  }
+
+}
+
+@Component({
+  selector: 'dialog-worker',
+  templateUrl: 'dialog-worker.html',
+})
+export class DialogWorker {
+
+  @Input() cWorker: any;
+  @Output()
+  updateList: EventEmitter<boolean> = new EventEmitter<boolean>();
+  matcher = new FormErrorMatcher();
+
+  worker: Worker;
+
+  updateWorker: FormGroup;
+
+  get first() { return this.updateWorker.get('first') }
+  get last() { return this.updateWorker.get('last') }
+  get serv() { return this.updateWorker.get('serv') }
+  get status() { return this.updateWorker.get('status') }
+
+  constructor(
+    private ws: WorkerService,
+    public dialogRef: MatDialogRef<DialogWorker>,
+    @Inject(MAT_DIALOG_DATA) public data: Worker) {
+
+    this.worker = data;
+    this.updateWorker = new FormGroup({
+      first: new FormControl(data.firstName, [Validators.required, Validators.pattern(/[a-zA-Z]*/)]),
+      last: new FormControl(data.lastName, [Validators.required, Validators.pattern(/[a-zA-Z]*/)]),
+      serv: new FormControl(data.serviceName, Validators.required),
+      status: new FormControl(data.available, Validators.required)
+    })
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onChange(isChecked: boolean) {
+    if (isChecked) {
+      this.worker.available = true;
+    }
+    else {
+      this.worker.available = false;
+    }
+  }
+
+  update() {
+    if (this.first.value) {
+      this.worker.firstName = this.first.value;
+    }
+    if (this.last.value) {
+      this.worker.lastName = this.last.value;
+    }
+    if (this.serv.value) {
+      this.worker.serviceName = this.serv.value;
+    }
+    if (this.status.value) {
+      // this.worker.available = false;
+      this.worker.available = this.status.value === 'true' ? true : false;
+    }
+    this.ws.update(this.worker).subscribe(data => {
+      if (data) {
+        this.closeDialog();
+        this.updateList.emit(true);
+      }
+    });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
 }

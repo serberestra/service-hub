@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Hi {{data.firstName}}</h1>
+<div mat-dialog-content>
+    <p>Edit Worker's Information</p>
+    <form class="form-signin needs-validation" novalidate [formGroup]="updateWorker" (submit)="update()">
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput placeholder="" name="fName" formControlName="first"
+                [errorStateMatcher]="matcher">
+            <mat-error *ngIf="first.hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput placeholder="" name="lName" formControlName="last"
+                [errorStateMatcher]="matcher">
+            <mat-error *ngIf="last.hasError('required')">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Service</mat-label>
+            <input type="text" matInput placeholder="" formControlName="serv" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="serv.hasError('required')">
+                Service is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- <td>Available?</td> -->
+        <!-- <td><input type="checkbox" (change)="onChange($event.target.checked)"></td> -->
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Status</mat-label>
+            <select matNativeControl required formControlName="status">
+                <option value="true">Available</option>
+                <option value="false">Unavailable</option>
+            </select>
+            <mat-error *ngIf="status.hasError('required')">
+                Status is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button class="bg-info text-uppercase" type="submit"
+            [disabled]="!updateWorker.valid"><strong>Accept</strong>
+        </button>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <p class="mt-4 mb-0 text-muted">Service Hub © 2020</p>
+    <!-- <button mat-raised-button (click)="onNoClick()">No Thanks</button> -->
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

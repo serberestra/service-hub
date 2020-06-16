@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './layout/layout.component';
 import { RegisterWorkerComponent } from './components/register-worker/register-worker.component';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
-import { WorkerListComponent } from './components/company-page/worker-list/worker-list.component';
+import { WorkerListComponent, DialogWorker } from './components/company-page/worker-list/worker-list.component';
 import { UpdateFormComponent } from './components/company-page/update-form/update-form.component';
 import { ServiceHistoryComponent } from "./components/company-page/service-history/service-history.component";
+
 // My routes
 import { companyRoutes } from './company.routes';
 
@@ -23,6 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { MatSortModule } from '@angular/material/sort';
     CompanyPageComponent,
     WorkerListComponent,
     UpdateFormComponent,
-    ServiceHistoryComponent
+    ServiceHistoryComponent,
+    DialogWorker
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,11 @@ import { MatSortModule } from '@angular/material/sort';
     MatButtonModule,
     MatTableModule,
     MatSortModule,
-
-  ]
+    MatDialogModule,
+    MatCheckboxModule
+  ],
+  entryComponents: [
+    DialogWorker
+  ],
 })
 export class CompanyModule { }
